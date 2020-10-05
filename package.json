@@ -1,0 +1,11 @@
+{
+  "name": "travel-weather",
+  "version": "1.0.0",
+  "description": "Final project for Udacity Front End Web Developer Nanodegree",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "JeffCad",
+  "license": "ISC"
+}
