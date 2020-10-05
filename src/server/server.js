@@ -17,8 +17,8 @@ app.use(express.static('dist'))
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.json())
+app.use(bodyParser.text())
 
-// TODO: ADD URL CONSTRUCTIONS FOR API CALLS HERE
 const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_URL = `&username=${GEONAMES_KEY}`
 const GEONAMES_MAX_ROWS = "&maxRows=1"
@@ -39,8 +39,9 @@ app.get('/',
 app.post('/callgeo', callGeo)
 
 async function callGeo(req, res) {
-    console.log(`Request city is ${req.body.destination}`)
-    const city = req.body.destination
+    console.log(req.body)
+    console.log(`Request city is ${req.body}`)
+    const city = req.body
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_MAX_ROWS
     console.log(`URL is ${geonamesURL}`)
     const response = await fetch(geonamesURL)

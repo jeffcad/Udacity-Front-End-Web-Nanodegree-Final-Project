@@ -12,20 +12,20 @@ export function submitted(event) {
 }
 
 async function apiCalls(userData) {
-    const geonameData = await getGeonameData(userData)
+    const geonameData = await getGeonameData(userData.destination)
     const cityData = extractCityData(geonameData)
     console.log(cityData)
 }
 
-async function getGeonameData(userData) {
+async function getGeonameData(destination) {
     const response = await fetch('http://localhost:8081/callgeo', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain'
         },
         // Body data type must match "Content-Type" header        
-        body: JSON.stringify(userData)
+        body: destination
     })
 
     const responseJSON = await response.json()
