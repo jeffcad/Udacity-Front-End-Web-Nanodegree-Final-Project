@@ -44,12 +44,12 @@ async function callGeo(req, res) {
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_MAX_ROWS
     console.log(`URL is ${geonamesURL}`)
     const response = await fetch(geonamesURL)
-    const geonamesData = await response.json()
+    const responseJSON = await response.json()
 
-    const longitude = geonamesData.geonames[0].lng
-    const latitude = geonamesData.geonames[0].lat
-    const country = geonamesData.geonames[0].countryName
-    const population = geonamesData.geonames[0].population
+    const longitude = responseJSON.geonames[0].lng
+    const latitude = responseJSON.geonames[0].lat
+    const country = responseJSON.geonames[0].countryName
+    const population = responseJSON.geonames[0].population
 
     const cityData = { latitude, longitude, country, population }
     console.log(cityData)

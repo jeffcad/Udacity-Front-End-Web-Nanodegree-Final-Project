@@ -1,4 +1,4 @@
-export async function submitted(event) {
+export function submitted(event) {
     event.preventDefault()
 
     console.log('Event listener connected')
@@ -8,12 +8,12 @@ export async function submitted(event) {
     console.log(`Departure date: ${departureDate}`)
     const userData = { "destination": destinationCity, "departure": departureDate }
     console.log(userData)
+    apiCalls(userData)
+}
 
-    const response = await getGeonameData(userData)
-    const responseJSON = await response.json()
-    const cityData = responseJSON.body
-    console.log(cityData)
-
+async function apiCalls(userData) {
+    const locationData = await getGeonameData(userData)
+    console.log(locationData)
 }
 
 async function getGeonameData(userData) {
@@ -27,5 +27,6 @@ async function getGeonameData(userData) {
         body: JSON.stringify(userData)
     })
 
-    return response
+    const responseJSON = await response.json()
+    return responseJSON
 }
