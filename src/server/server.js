@@ -46,15 +46,7 @@ async function callGeo(req, res) {
     const response = await fetch(geonamesURL)
     const responseJSON = await response.json()
 
-    const longitude = responseJSON.geonames[0].lng
-    const latitude = responseJSON.geonames[0].lat
-    const country = responseJSON.geonames[0].countryName
-    const population = responseJSON.geonames[0].population
-
-    const cityData = { latitude, longitude, country, population }
-    console.log(cityData)
-
-    res.send(cityData)
+    res.send(responseJSON)
 }
 
 

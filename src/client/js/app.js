@@ -12,8 +12,9 @@ export function submitted(event) {
 }
 
 async function apiCalls(userData) {
-    const locationData = await getGeonameData(userData)
-    console.log(locationData)
+    const geonameData = await getGeonameData(userData)
+    const cityData = extractCityData(geonameData)
+    console.log(cityData)
 }
 
 async function getGeonameData(userData) {
@@ -29,4 +30,13 @@ async function getGeonameData(userData) {
 
     const responseJSON = await response.json()
     return responseJSON
+}
+
+function extractCityData(geonameData) {
+    const longitude = geonameData.geonames[0].lng
+    const latitude = geonameData.geonames[0].lat
+    const country = geonameData.geonames[0].countryName
+    const population = geonameData.geonames[0].population
+
+    return { latitude, longitude, country, population }
 }
