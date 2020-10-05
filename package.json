@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
+    "start": "node src/server/server.js",
     "dev": "webpack-dev-server --config webpack.config.js --open"
   },
   "author": "JeffCad",
