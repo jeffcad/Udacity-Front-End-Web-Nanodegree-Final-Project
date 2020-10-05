@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 // TODO: ADD URL CONSTRUCTIONS FOR API CALLS HERE
 const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_URL = `&username=${GEONAMES_KEY}`
-const GEONAMES_MAX_ROWS = "&maxRows=10"
+const GEONAMES_MAX_ROWS = "&maxRows=1"
 
 
 const port = 8081
@@ -36,20 +36,25 @@ app.get('/',
     (req, res) => res.sendFile('dist/index.html')
 )
 
-app.post('/call', callAPI)
+app.post('/callgeo', callGeo)
 
-async function callAPI(req, res) {
+async function callGeo(req, res) {
     console.log(`Request city is ${req.body.destination}`)
     const city = req.body.destination
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_MAX_ROWS
-    console.log(geonamesURL)
+    console.log(`URL is ${geonamesURL}`)
     const response = await fetch(geonamesURL)
-    console.log(`Response: ${response}`)
     const geonamesData = await response.json()
-    console.log(`geonamesData type: ${typeof (geonamesData["geonames"][0])}`)
-    console.log(`Geonames returned this: ${geonamesData["geonames"][0]}`)
 
-    res.send(geonamesData)
+    const longitude = geonamesData.geonames[0].lng
+    const latitude = geonamesData.geonames[0].lat
+    const country = geonamesData.geonames[0].countryName
+    const population = geonamesData.geonames[0].population
+
+    const cityData = { latitude, longitude, country, population }
+    console.log(cityData)
+
+    res.send(cityData)
 }
 
 

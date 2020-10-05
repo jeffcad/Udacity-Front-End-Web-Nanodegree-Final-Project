@@ -1,5 +1,6 @@
-export function submitted(event) {
+export async function submitted(event) {
     event.preventDefault()
+
     console.log('Event listener connected')
     const destinationCity = document.getElementById('destination-city').value
     console.log(`City: ${destinationCity}`)
@@ -8,12 +9,15 @@ export function submitted(event) {
     const userData = { "destination": destinationCity, "departure": departureDate }
     console.log(userData)
 
-    sendToServer(userData)
+    const response = await getGeonameData(userData)
+    const responseJSON = await response.json()
+    const cityData = responseJSON.body
+    console.log(cityData)
 
 }
 
-function sendToServer(userData) {
-    fetch('http://localhost:8081/call', {
+async function getGeonameData(userData) {
+    const response = await fetch('http://localhost:8081/callgeo', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -22,4 +26,6 @@ function sendToServer(userData) {
         // Body data type must match "Content-Type" header        
         body: JSON.stringify(userData)
     })
+
+    return response
 }
