@@ -13,29 +13,30 @@ export function submitted(event) {
     const timeUntilTrip = countdown(null, new Date(departureDate), countdown.DAYS).days
     console.log(`Days until departure: ${timeUntilTrip}`)
 
-    const userData = { "destination": destinationCity, "departure": departureDate, "countdown": timeUntilTrip }
-    console.log(userData)
+    let bigData = {}
+    bigData["userData"] = { destinationCity, departureDate, timeUntilTrip }
+    console.log(bigData.userData)
 
-    apiCalls(userData)
+    apiCalls(bigData)
 }
 
-async function apiCalls(userData) {
+async function apiCalls(bigData) {
 
-    const geonameData = await getGeonameData(userData.destination)
-    const cityData = extractCityData(geonameData)
-    console.log(cityData)
+    const geonameData = await getGeonameData(bigData.userData.destinationCity)
+    bigData["cityData"] = extractCityData(geonameData)
+    console.log(bigData.cityData)
 
-    const weatherbitData = await getWeatherbitData(cityData)
-    const forecastData = extractForecastData(weatherbitData, userData.countdown)
-    console.log(forecastData)
+    const weatherbitData = await getWeatherbitData(bigData.cityData)
+    bigData["forecastData"] = extractForecastData(weatherbitData, bigData.userData.timeUntilTrip)
+    console.log(bigData.forecastData)
 
-    const photoData = await getPhotoData(userData.destination)
+    const photoData = await getPhotoData(bigData.userData.destinationCity)
     console.log(photoData)
-    const photo = extractPhoto(photoData)
-    console.log(photo)
+    bigData["photo"] = extractPhoto(photoData)
+    console.log(bigData.photo)
 }
 
-async function getGeonameData(destination) {
+async function getGeonameData(destinationCity) {
     const response = await fetch('http://localhost:8081/callgeo', {
         method: 'POST',
         credentials: 'same-origin',
@@ -43,7 +44,7 @@ async function getGeonameData(destination) {
             'Content-Type': 'text/plain'
         },
         // Body data type must match "Content-Type" header        
-        body: destination
+        body: destinationCity
     })
 
     const responseJSON = await response.json()
@@ -74,11 +75,11 @@ async function getWeatherbitData(cityData) {
     return responseJSON
 }
 
-function extractForecastData(weatherbitData, countdown) {
+function extractForecastData(weatherbitData, timeUntilTrip) {
     const forecastData = []
 
     // counter max is 15 because API currently returns max 16 days data
-    for (let i = countdown; i <= 15; i++) {
+    for (let i = timeUntilTrip; i <= 15; i++) {
         const date = weatherbitData.data[i].valid_date
         const windSpeed = weatherbitData.data[i].wind_spd
         const windDirection = weatherbitData.data[i].wind_dir
@@ -97,7 +98,7 @@ function extractForecastData(weatherbitData, countdown) {
 
 // Can refactor this one to use the getGeoname function instead
 // Pass different route URL in, then it's the same
-async function getPhotoData(destination) {
+async function getPhotoData(destinationCity) {
     const response = await fetch('http://localhost:8081/callphoto', {
         method: 'POST',
         credentials: 'same-origin',
@@ -105,7 +106,7 @@ async function getPhotoData(destination) {
             'Content-Type': 'text/plain'
         },
         // Body data type must match "Content-Type" header        
-        body: destination
+        body: destinationCity
     })
 
     const responseJSON = await response.json()

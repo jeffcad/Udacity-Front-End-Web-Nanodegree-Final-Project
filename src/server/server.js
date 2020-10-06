@@ -1,8 +1,17 @@
 const dotenv = require('dotenv')
 dotenv.config()
-const GEONAMES_KEY = process.env.GEONAMES_KEY
-const WEATHERBIT_KEY = process.env.WEATHERBIT_KEY
-const PIXABAY_KEY = process.env.PIXABAY_KEY
+
+const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
+const GEONAMES_KEY_URL = `&username=${process.env.GEONAMES_KEY}`
+const GEONAMES_PARAMS = "&maxRows=1"
+
+const WEATHERBIT_ROOT = "https://api.weatherbit.io/v2.0/forecast/daily?"
+const WEATHERBIT_KEY_URL = `&key=${process.env.WEATHERBIT_KEY}`
+const WEATHERBIT_PARAMS = "&units="
+
+const PIXABAY_ROOT = "https://pixabay.com/api/?q="
+const PIXABAY_KEY_URL = `&key=${process.env.PIXABAY_KEY}`
+const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
 const express = require('express')
 const cors = require('cors')
@@ -18,18 +27,6 @@ app.use(express.static('dist'))
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.json())
 app.use(bodyParser.text())
-
-const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
-const GEONAMES_KEY_URL = `&username=${GEONAMES_KEY}`
-const GEONAMES_PARAMS = "&maxRows=1"
-
-const WEATHERBIT_ROOT = "https://api.weatherbit.io/v2.0/forecast/daily?"
-const WEATHERBIT_KEY_URL = `&key=${WEATHERBIT_KEY}`
-const WEATHERBIT_PARAMS = "&units="
-
-const PIXABAY_ROOT = "https://pixabay.com/api/?q="
-const PIXABAY_KEY_URL = `&key=${PIXABAY_KEY}`
-const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
 // Designates what port the app will listen to for incoming requests
 const port = 8081
