@@ -68,5 +68,22 @@ async function getWeatherbitData(cityData) {
 }
 
 function extractForecastData(weatherbitData, countdown) {
+    const forecastData = []
 
+    // counter max is 15 because API currently returns max 16 days data
+    for (let i = countdown; i <= 15; i++) {
+        const date = weatherbitData.data[i].valid_date
+        const windSpeed = weatherbitData.data[i].wind_spd
+        const windDirection = weatherbitData.data[i].wind_dir
+        const highTemperature = weatherbitData.data[i].high_temp
+        const lowTemperature = weatherbitData.data[i].low_temp
+        const chancePrecipitation = weatherbitData.data[i].pop
+        const precipitation = weatherbitData.data[i].precip
+        const snow = weatherbitData.data[i].snow
+        const humidity = weatherbitData.data[i].rh
+        const description = weatherbitData.data[i].weather.description
+        const icon = weatherbitData.data[i].weather.icon
+        forecastData.push({ date, windSpeed, windDirection, highTemperature, lowTemperature, chancePrecipitation, precipitation, snow, humidity, description, icon })
+    }
+    return forecastData
 }
