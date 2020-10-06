@@ -27,6 +27,11 @@ const WEATHERBIT_ROOT = "https://api.weatherbit.io/v2.0/forecast/daily?"
 const WEATHERBIT_KEY_URL = `&key=${WEATHERBIT_KEY}`
 const WEATHERBIT_PARAMS = "&units="
 
+const PIXABAY_ROOT = "https://pixabay.com/api/?q="
+const PIXABAY_KEY_URL = `&key=${PIXABAY_KEY}`
+const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true"
+
+
 
 const port = 8081
 
@@ -70,6 +75,20 @@ async function callWeather(req, res) {
     const responseJSON = await response.json()
 
     res.send(responseJSON)
+}
+
+app.post('/callphoto', callPhoto)
+
+async function callPhoto(req, res) {
+    console.log(req.body)
+    console.log(`Request city is ${req.body}`)
+    const city = req.body
+    const pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
+    console.log(`URL is ${pixabayURL}`)
+    const response = await fetch(pixabayURL)
+    const responseJSON = await response.json()
+
+    res.send(responseJSON.hits[0])
 }
 
 

@@ -20,12 +20,18 @@ export function submitted(event) {
 }
 
 async function apiCalls(userData) {
+
     const geonameData = await getGeonameData(userData.destination)
     const cityData = extractCityData(geonameData)
     console.log(cityData)
+
     const weatherbitData = await getWeatherbitData(cityData)
     const forecastData = extractForecastData(weatherbitData, userData.countdown)
     console.log(forecastData)
+
+    const photoData = await getPhotoData(userData.destination)
+    const photo = photoData.webformatURL
+    console.log(photo)
 }
 
 async function getGeonameData(destination) {
@@ -86,4 +92,21 @@ function extractForecastData(weatherbitData, countdown) {
         forecastData.push({ date, windSpeed, windDirection, highTemperature, lowTemperature, chancePrecipitation, precipitation, snow, humidity, description, icon })
     }
     return forecastData
+}
+
+// Can refactor this one to use the getGeoname function instead
+// Pass different route URL in, then it's the same
+async function getPhotoData(destination) {
+    const response = await fetch('http://localhost:8081/callphoto', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        // Body data type must match "Content-Type" header        
+        body: destination
+    })
+
+    const responseJSON = await response.json()
+    return responseJSON
 }
