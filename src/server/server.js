@@ -31,11 +31,8 @@ const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL = `&key=${PIXABAY_KEY}`
 const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
-
-
-const port = 8081
-
 // Designates what port the app will listen to for incoming requests
+const port = 8081
 app.listen(port,
     () => console.log(`Travel weather app listening on port ${port}!`)
 )
