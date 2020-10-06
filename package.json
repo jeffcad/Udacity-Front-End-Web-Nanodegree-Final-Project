@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "node src/server/server.js",
-    "dev": "webpack-dev-server --config webpack.config.js --open"
+    "dev": "webpack-dev-server --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "JeffCad",
   "license": "ISC",
