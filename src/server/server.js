@@ -13,6 +13,8 @@ const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL = `&key=${process.env.PIXABAY_KEY}`
 const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
+const bigData = []
+
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -42,11 +44,10 @@ app.get('/',
 app.post('/callgeo', callGeo)
 
 async function callGeo(req, res) {
-    console.log(req.body)
-    console.log(`Request city is ${req.body}`)
+    console.log(`Geonames request city is ${req.body}`)
     const city = req.body
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_PARAMS
-    console.log(`URL is ${geonamesURL}`)
+    console.log(`Geonames URL is ${geonamesURL}`)
     const response = await fetch(geonamesURL)
     const responseJSON = await response.json()
 
@@ -56,7 +57,6 @@ async function callGeo(req, res) {
 app.post('/callweather', callWeather)
 
 async function callWeather(req, res) {
-    console.log(req.body)
     console.log(`Request latitude is ${req.body.latitude}`)
     console.log(`Request longitude is ${req.body.longitude}`)
     const latitude = req.body.latitude
@@ -64,7 +64,7 @@ async function callWeather(req, res) {
     const locationURL = `lat=${latitude}&lon=${longitude}`
     const units = "M"
     const weatherbitURL = WEATHERBIT_ROOT + locationURL + WEATHERBIT_KEY_URL + WEATHERBIT_PARAMS + units
-    console.log(`URL is ${weatherbitURL}`)
+    console.log(`Weatherbit URL is ${weatherbitURL}`)
     const response = await fetch(weatherbitURL)
     const responseJSON = await response.json()
 
@@ -74,15 +74,22 @@ async function callWeather(req, res) {
 app.post('/callphoto', callPhoto)
 
 async function callPhoto(req, res) {
-    console.log(req.body)
-    console.log(`Request city is ${req.body}`)
+    console.log(`Pixabay request city is ${req.body}`)
     const city = req.body
     const pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
-    console.log(`URL is ${pixabayURL}`)
+    console.log(`Pixabay URL is ${pixabayURL}`)
     const response = await fetch(pixabayURL)
     const responseJSON = await response.json()
 
     res.send(responseJSON)
+}
+
+app.post('/storedata', storeData)
+
+function storeData(req, res) {
+    bigData.push(req.body)
+    console.log(bigData)
+    res.send({ message: "Data received and stored" })
 }
 
 

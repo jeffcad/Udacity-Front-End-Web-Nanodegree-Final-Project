@@ -34,6 +34,9 @@ async function apiCalls(bigData) {
     console.log(photoData)
     bigData["photo"] = extractPhoto(photoData)
     console.log(bigData.photo)
+
+    const storeMessage = await storeBigData(bigData)
+    console.log(storeMessage)
 }
 
 async function getGeonameData(destinationCity) {
@@ -129,4 +132,19 @@ function extractPhoto(photoData) {
     }
     console.log(`Top photo had ${topLikes} likes`)
     return chosenPhoto
+}
+
+async function storeBigData(bigData) {
+    const response = await fetch('http://localhost:8081/storedata', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // Body data type must match "Content-Type" header        
+        body: JSON.stringify(bigData)
+    })
+
+    const responseJSON = await response.json()
+    return responseJSON
 }
