@@ -23,6 +23,9 @@ async function apiCalls(userData) {
     const geonameData = await getGeonameData(userData.destination)
     const cityData = extractCityData(geonameData)
     console.log(cityData)
+    const weatherbitData = await getWeatherbitData(cityData)
+    const forecastData = extractForecastData(weatherbitData, userData.countdown)
+    console.log(forecastData)
 }
 
 async function getGeonameData(destination) {
@@ -47,4 +50,23 @@ function extractCityData(geonameData) {
     const population = geonameData.geonames[0].population
 
     return { latitude, longitude, country, population }
+}
+
+async function getWeatherbitData(cityData) {
+    const response = await fetch('http://localhost:8081/callweather', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // Body data type must match "Content-Type" header        
+        body: JSON.stringify(cityData)
+    })
+
+    const responseJSON = await response.json()
+    return responseJSON
+}
+
+function extractForecastData(weatherbitData, countdown) {
+
 }
