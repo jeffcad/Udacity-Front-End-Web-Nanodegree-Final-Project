@@ -29,7 +29,7 @@ const WEATHERBIT_PARAMS = "&units="
 
 const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL = `&key=${PIXABAY_KEY}`
-const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true"
+const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
 
 
@@ -88,7 +88,7 @@ async function callPhoto(req, res) {
     const response = await fetch(pixabayURL)
     const responseJSON = await response.json()
 
-    res.send(responseJSON.hits[0])
+    res.send(responseJSON)
 }
 
 

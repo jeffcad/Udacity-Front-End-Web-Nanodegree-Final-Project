@@ -30,7 +30,8 @@ async function apiCalls(userData) {
     console.log(forecastData)
 
     const photoData = await getPhotoData(userData.destination)
-    const photo = photoData.webformatURL
+    console.log(photoData)
+    const photo = extractPhoto(photoData)
     console.log(photo)
 }
 
@@ -109,4 +110,22 @@ async function getPhotoData(destination) {
 
     const responseJSON = await response.json()
     return responseJSON
+}
+
+// Could also make photo selection random
+function extractPhoto(photoData) {
+    let topLikes = 0
+    let chosenPhoto = ""
+    let count = 100
+    if (photoData.totalHits < count) {
+        count = photoData.totalHits
+    }
+    for (let i = 0; i < count; i++) {
+        if (photoData.hits[i].likes > topLikes) {
+            chosenPhoto = photoData.hits[i].webformatURL
+            topLikes = photoData.hits[i].likes
+        }
+    }
+    console.log(`Top photo had ${topLikes} likes`)
+    return chosenPhoto
 }
