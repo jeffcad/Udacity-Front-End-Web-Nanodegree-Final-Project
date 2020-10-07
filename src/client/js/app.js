@@ -169,5 +169,18 @@ function updateUI(bigData) {
     imageContainer.append(locationImage)
 
     const fragment = document.createDocumentFragment()
+    const forecasts = bigData.forecastData
+    for (const forecast of forecasts) {
+        const forecastCard = createForecastCard(forecast)
+        fragment.append(forecastCard)
+    }
+    const forecastCardContainer = document.getElementById('forecast-card-container')
+    forecastCardContainer.append(fragment)
 
+}
+
+function createForecastCard(forecast) {
+    const forecastCard = document.createElement('div')
+    forecastCard.innerHTML = forecast.date
+    return forecastCard
 }
