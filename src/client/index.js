@@ -33,10 +33,6 @@ import './icons/t04d.png'
 import './icons/t05d.png'
 import './icons/u00d.png'
 
-
-
-
-
 const submitButton = document.getElementById('submit-button')
 submitButton.addEventListener('click', submitted)
 
