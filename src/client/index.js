@@ -1,4 +1,11 @@
 import { submitted } from './js/app'
+import { getGeonameData } from './js/apiCalls'
+import { getWeatherbitData } from './js/apiCalls'
+import { getPhotoData } from './js/apiCalls'
+import { extractCityData } from './js/extractions'
+import { extractForecastData } from './js/extractions'
+import { extractPhoto } from './js/extractions'
+import { createForecastCard } from './js/createForecastCard'
 
 import './icons/a01d.png'
 import './icons/a02d.png'
@@ -36,6 +43,13 @@ import './icons/u00d.png'
 const submitButton = document.getElementById('submit-button')
 submitButton.addEventListener('click', submitted)
 
-// export {
-//     submitted
-// }
+export {
+    submitted,
+    getGeonameData,
+    getWeatherbitData,
+    getPhotoData,
+    extractCityData,
+    extractForecastData,
+    extractPhoto,
+    createForecastCard
+}
