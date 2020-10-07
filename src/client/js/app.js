@@ -1,6 +1,6 @@
 const countdown = require('countdown')
 
-export function submitted(event) {
+export async function submitted(event) {
     event.preventDefault()
     console.log('Event listener connected')
 
@@ -17,7 +17,8 @@ export function submitted(event) {
     bigData["userData"] = { destinationCity, departureDate, timeUntilTrip }
     console.log(bigData.userData)
 
-    apiCalls(bigData)
+    bigData = await apiCalls(bigData)
+    updateUI(bigData)
 }
 
 async function apiCalls(bigData) {
@@ -37,6 +38,8 @@ async function apiCalls(bigData) {
 
     const storeMessage = await storeBigData(bigData)
     console.log(storeMessage)
+
+    return bigData
 }
 
 async function getGeonameData(destinationCity) {
@@ -147,4 +150,24 @@ async function storeBigData(bigData) {
 
     const responseJSON = await response.json()
     return responseJSON
+}
+
+function updateUI(bigData) {
+
+    let days = "days"
+    if (bigData.userData.timeUntilTrip == 1) {
+        days = "day"
+    }
+    document.getElementById('countdown').innerHTML = `Your trip to ${bigData.userData.destinationCity} is coming up in ${bigData.userData.timeUntilTrip} ${days}!`
+    document.getElementById('forecast-title').innerHTML = "Here is the forecast for your trip:"
+    const locationImage = document.createElement('img')
+    locationImage.src = bigData.photo
+    locationImage.height = 225
+    locationImage.width = 300
+    const imageContainer = document.getElementById('location-image-container')
+    imageContainer.innerHTML = ""
+    imageContainer.append(locationImage)
+
+    const fragment = document.createDocumentFragment()
+
 }
