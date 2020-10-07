@@ -14,10 +14,21 @@
         <input type="text" id="destination-city" placeholder="Enter destination city here">
         <label for="departure-date">Departure Date</label>
         <input type="date" id="departure-date">
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date">
+        <legend>Select units:</legend>
+        <label for="metric">Metric</label>
+        <input type="radio" name="units" id="metric" value="metric" checked>
+        <label for="imperial">Imperial</label>
+        <input type="radio" name="units" id="imperial" value="imperial">
         <input type="submit" id="submit-button">
     </form>
     <section id="results">
         <p>Results go here</p>
+        <h1 id="countdown"></h1>
+        <h2 id="forecast-title"></h2>
+        <div id="location-image-container"></div>
+        <div id=forecast-card-container></div>
     </section>
     <footer>Final project for Udacity's Front End Web Developer Nanodegree</footer>
 
