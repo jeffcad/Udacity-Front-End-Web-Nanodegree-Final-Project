@@ -27,7 +27,10 @@ module.exports = {
             {
                 test: /\.png$|\.jpg$/,
                 loader: 'file-loader',
-                options: { name: '[name].[ext]' }
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'icons'
+                }
             },
             {
                 test: /\.html$/,

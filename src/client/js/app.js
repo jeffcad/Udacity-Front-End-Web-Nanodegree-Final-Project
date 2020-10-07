@@ -188,9 +188,9 @@ function createForecastCard(forecast) {
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('date')
     dateDiv.innerHTML = `Date: ${forecast.date}`
-    // const iconDiv = document.createElement('div')
-    // iconDiv.classList.add('icon')
-    // iconDiv.innerHTML = `<img src="./icons/${forecast.icon}.png">`
+    const iconDiv = document.createElement('div')
+    iconDiv.classList.add('icon')
+    iconDiv.innerHTML = `<img src="./icons/${forecast.icon}.png">`
     const descriptionDiv = document.createElement('div')
     descriptionDiv.classList.add('description')
     descriptionDiv.innerHTML = forecast.description
@@ -205,7 +205,7 @@ function createForecastCard(forecast) {
     chancePrecipitationDiv.innerHTML = `Chance of precipitation: ${forecast.chancePrecipitation}%`
 
     forecastCard.append(dateDiv)
-    // forecastCard.append(iconDiv)
+    forecastCard.append(iconDiv)
     forecastCard.append(descriptionDiv)
     forecastCard.append(highTemperatureDiv)
     forecastCard.append(lowTemperatureDiv)
