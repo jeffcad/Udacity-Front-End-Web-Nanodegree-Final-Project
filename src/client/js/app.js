@@ -180,7 +180,36 @@ function updateUI(bigData) {
 }
 
 function createForecastCard(forecast) {
+
     const forecastCard = document.createElement('div')
-    forecastCard.innerHTML = forecast.date
+    forecastCard.classList.add('forecast-card')
+
+    //Can I clean this all up into an iteration? Spread operator?
+    const dateDiv = document.createElement('div')
+    dateDiv.classList.add('date')
+    dateDiv.innerHTML = `Date: ${forecast.date}`
+    // const iconDiv = document.createElement('div')
+    // iconDiv.classList.add('icon')
+    // iconDiv.innerHTML = `<img src="./icons/${forecast.icon}.png">`
+    const descriptionDiv = document.createElement('div')
+    descriptionDiv.classList.add('description')
+    descriptionDiv.innerHTML = forecast.description
+    const highTemperatureDiv = document.createElement('div')
+    highTemperatureDiv.classList.add('high-temperature')
+    highTemperatureDiv.innerHTML = `High temperature: ${forecast.highTemperature} degrees`
+    const lowTemperatureDiv = document.createElement('div')
+    lowTemperatureDiv.classList.add('low-temperature')
+    lowTemperatureDiv.innerHTML = `Low temperature: ${forecast.lowTemperature} degrees`
+    const chancePrecipitationDiv = document.createElement('div')
+    chancePrecipitationDiv.classList.add('chance-precipitation')
+    chancePrecipitationDiv.innerHTML = `Chance of precipitation: ${forecast.chancePrecipitation}%`
+
+    forecastCard.append(dateDiv)
+    // forecastCard.append(iconDiv)
+    forecastCard.append(descriptionDiv)
+    forecastCard.append(highTemperatureDiv)
+    forecastCard.append(lowTemperatureDiv)
+    forecastCard.append(chancePrecipitationDiv)
+
     return forecastCard
 }
