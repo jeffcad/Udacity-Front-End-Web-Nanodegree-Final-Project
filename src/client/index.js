@@ -58,23 +58,35 @@ export {
 }
 
 (function () {
-    console.log("getTodayDate has been called")
     const d = new Date()
-    let month = (d.getMonth() + 1).toString()
-    let date = d.getDate().toString()
-    const year = d.getFullYear().toString()
-    if (month.length == 1) {
-        month = "0" + month
+    let minMonth = (d.getMonth() + 1).toString()
+    let minDate = d.getDate().toString()
+    const minYear = d.getFullYear().toString()
+    if (minMonth.length == 1) {
+        minMonth = "0" + minMonth
     }
-    if (date.length == 1) {
-        date = "0" + date
+    if (minDate.length == 1) {
+        minDate = "0" + minDate
     }
 
-    const formattedDate = `${year}-${month}-${date}`
+    d.setDate(d.getDate() + 15)
+    let maxMonth = (d.getMonth() + 1).toString()
+    let maxDate = d.getDate().toString()
+    const maxYear = d.getFullYear().toString()
+    if (maxMonth.length == 1) {
+        maxMonth = "0" + maxMonth
+    }
+    if (maxDate.length == 1) {
+        maxDate = "0" + maxDate
+    }
+
+    const formattedMinDate = `${minYear}-${minMonth}-${minDate}`
+    const formattedMaxDate = `${maxYear}-${maxMonth}-${maxDate}`
     const departureDate = document.getElementById('departure-date')
-    departureDate.setAttribute("min", formattedDate)
+    departureDate.setAttribute("min", formattedMinDate)
+    departureDate.setAttribute("max", formattedMaxDate)
     const returnDate = document.getElementById('return-date')
-    returnDate.setAttribute("min", formattedDate)
+    returnDate.setAttribute("min", formattedMinDate)
 
 })()
 
