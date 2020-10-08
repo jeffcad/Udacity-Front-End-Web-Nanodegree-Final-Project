@@ -13,11 +13,14 @@ export function createForecastCard(forecast, units) {
 
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('date')
-    dateDiv.innerHTML = forecast.date
+    dateDiv.innerHTML = `<h2 class="card-date">${forecast.date}</h2>`
 
-    const iconDiv = document.createElement('div')
-    iconDiv.classList.add('icon')
-    iconDiv.innerHTML = `<img src="./icons/${forecast.icon}.png">`
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = `./icons/${forecast.icon}.png`
+    icon.alt = ""
+    icon.height = 120
+    icon.width = 120
 
     const descriptionDiv = document.createElement('div')
     descriptionDiv.classList.add('description')
@@ -25,11 +28,11 @@ export function createForecastCard(forecast, units) {
 
     const highTemperatureDiv = document.createElement('div')
     highTemperatureDiv.classList.add('high-temperature')
-    highTemperatureDiv.innerHTML = `High temperature: ${forecast.highTemperature}\xB0${temperatureUnit}`
+    highTemperatureDiv.innerHTML = `High temperature: ${forecast.highTemperature}°${temperatureUnit}`
 
     const lowTemperatureDiv = document.createElement('div')
     lowTemperatureDiv.classList.add('low-temperature')
-    lowTemperatureDiv.innerHTML = `Low temperature: ${forecast.lowTemperature}\xB0${temperatureUnit}`
+    lowTemperatureDiv.innerHTML = `Low temperature: ${forecast.lowTemperature}°${temperatureUnit}`
 
     const humidityDiv = document.createElement('div')
     humidityDiv.classList.add('humidity')
@@ -53,10 +56,10 @@ export function createForecastCard(forecast, units) {
 
     const windDirectionDiv = document.createElement('div')
     windDirectionDiv.classList.add('wind-direction')
-    windDirectionDiv.innerHTML = `Wind direction: ${forecast.windDirection}\xB0`
+    windDirectionDiv.innerHTML = `Wind direction: ${forecast.windDirection}°`
 
     forecastCard.append(dateDiv)
-    forecastCard.append(iconDiv)
+    forecastCard.append(icon)
     forecastCard.append(descriptionDiv)
     forecastCard.append(highTemperatureDiv)
     forecastCard.append(lowTemperatureDiv)

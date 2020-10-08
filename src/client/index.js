@@ -7,6 +7,8 @@ import { extractForecastData } from './js/extractions'
 import { extractPhoto } from './js/extractions'
 import { createForecastCard } from './js/createForecastCard'
 
+import './styles/main.scss'
+
 import './icons/a01d.png'
 import './icons/a02d.png'
 import './icons/a03d.png'

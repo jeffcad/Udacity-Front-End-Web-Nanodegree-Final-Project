@@ -4,35 +4,37 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <title>Travel Weather App</title>
 </head>
 
 <body>
-    <header>Travel Weather Guide</header>
+    <header>🛫Travel Weather Guide🌞</header>
     <form>
         <label for="destination-city">Destination City</label>
-        <input type="text" id="destination-city" placeholder="Enter destination city here">
+        <input type="text" id="destination-city" placeholder="Enter destination city">
         <label for="departure-date">Departure Date</label>
         <input type="date" id="departure-date">
         <label for="return-date">Return Date</label>
         <input type="date" id="return-date">
         <legend>Select units:</legend>
-        <label for="metric">Metric</label>
-        <input type="radio" name="units" id="metric" value="metric" checked>
-        <label for="imperial">Imperial</label>
-        <input type="radio" name="units" id="imperial" value="imperial">
+        <div class="radio">
+            <label for="metric">Metric</label>
+            <input type="radio" name="units" id="metric" value="metric" checked>
+            <label for="imperial">Imperial</label>
+            <input type="radio" name="units" id="imperial" value="imperial">
+        </div>
         <input type="submit" id="submit-button">
     </form>
     <section id="results">
-        <p>Results go here</p>
-        <h1 id="countdown"></h1>
+        <h1 id="how-many-sleeps"></h1>
         <div id="location-image-container"></div>
-        <h2 id="forecast-title"></h2>
+        <h1 id="forecast-title"></h1>
         <div id=forecast-card-container></div>
     </section>
-    <footer>Final project for Udacity's Front End Web Developer Nanodegree</footer>
-
-
+    <footer>
+        Final project for Udacity's Front End Web Developer Nanodegree
+    </footer>
 </body>
 
 </html>

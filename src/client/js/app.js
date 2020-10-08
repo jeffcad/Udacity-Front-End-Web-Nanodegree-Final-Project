@@ -69,14 +69,17 @@ async function storeBigData(bigData) {
 
 function updateUI(bigData) {
 
-    let daysString = "days"
-    if (bigData.userData.timeUntilTrip == 1) {
-        daysString = "day"
+    if (bigData.userData.timeUntilTrip == 0) {
+        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is today! Are you ready to go?`
+    } else if (bigData.userData.timeUntilTrip == 1) {
+        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is tomorrow! Are you packed?`
+    } else {
+        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is coming up in ${bigData.userData.timeUntilTrip} days!`
     }
-    document.getElementById('countdown').innerHTML = `Your trip to ${bigData.userData.destinationCity} is coming up in ${bigData.userData.timeUntilTrip} ${daysString}!`
     document.getElementById('forecast-title').innerHTML = "Here is the forecast for your trip:"
     const locationImage = document.createElement('img')
     locationImage.src = bigData.photo
+    locationImage.alt = `Photo taken in ${bigData.userData.destinationCity}`
     locationImage.height = 225
     locationImage.width = 300
     const imageContainer = document.getElementById('location-image-container')
