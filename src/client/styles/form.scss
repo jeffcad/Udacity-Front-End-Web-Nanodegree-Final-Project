@@ -1,0 +1,124 @@
+$primary-colour: #ff6600;
+$shadow-colour: #803300;
+$focus-colour: powderblue;
+$h1-text-size: 3rem;
+$h2-text-size: 2.5rem;
+$header-text-size: 5rem;
+$footer-text-size: 3rem;
+$reg-text-size: 2rem;
+
+form {
+    grid-area: 2/1/3/2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: $reg-text-size;
+
+    .destination,
+    .departure,
+    .return,
+    .units {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    input {
+        padding: 5px;
+        margin: 5px 20px 20px 20px;
+        font-size: $reg-text-size;
+        font-family: 'Indie Flower', cursive;
+        border: 2px solid $primary-colour;
+        border-radius: 5px;
+
+        &:focus,
+        &:hover {
+            border: 2px solid $focus-colour;
+            border-radius: 5px;
+            outline: none;
+        }
+    }
+
+    .radio {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        [type="radio"] {
+            appearance: none;
+            margin-bottom: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            vertical-align: middle;
+            border: 2px solid $primary-colour;
+            transition: 0.3s;
+
+            &:hover {
+                border: 9px solid $focus-colour;
+            }
+
+            &:checked {
+                border: 9px solid $primary-colour;
+            }
+
+            &:focus {
+                outline: 2px solid $primary-colour;
+            }
+        }
+
+        #metric {
+            margin-right: 20px;
+        }
+    }
+
+    #submit-button {
+        background-color: $primary-colour;
+        color: white;
+        cursor: pointer;
+        border-color: black;
+        border-radius: 10px;
+        padding: 0 30px;
+        margin-top: 20px;
+        font-size: $reg-text-size;
+        opacity: 0.6;
+        transition: 0.3s;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+
+        &:active {
+            background-color: $focus-colour;
+        }
+    }
+}
+
+@media (min-width: 700px) {
+
+    form {
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        
+        input {
+            margin: 0;
+
+            &[type="radio"] {
+                margin-left: 10px;
+            }
+        }
+
+        .destination,
+        .departure,
+        .return,
+        .units {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+}

@@ -8,6 +8,9 @@ import { extractPhoto } from './js/extractions'
 import { createForecastCard } from './js/createForecastCard'
 
 import './styles/main.scss'
+import './styles/form.scss'
+import './styles/forecast.scss'
+
 
 import './icons/a01d.png'
 import './icons/a02d.png'
