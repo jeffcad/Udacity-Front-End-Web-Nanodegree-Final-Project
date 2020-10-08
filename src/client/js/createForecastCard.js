@@ -46,8 +46,6 @@ export function createForecastCard(forecast, units) {
     icon.classList.add('icon')
     icon.src = `./icons/${forecast.icon}.png`
     icon.alt = ""
-    icon.height = 120
-    icon.width = 120
 
     const descriptionDiv = document.createElement('div')
     descriptionDiv.classList.add('description')
