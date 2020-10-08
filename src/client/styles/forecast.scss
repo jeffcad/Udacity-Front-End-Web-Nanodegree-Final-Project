@@ -1,5 +1,6 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
+$card-colour: rgba(255, 240, 230, 0.5);
 $focus-colour: powderblue;
 $h1-text-size: 3rem;
 $h2-text-size: 2.5rem;
@@ -21,6 +22,7 @@ $reg-text-size: 2rem;
     align-items: center;
     border: 3px solid $primary-colour;
     border-radius: 10px;
+    background-color: $card-colour;
     box-shadow: 5px 5px 5px $shadow-colour;
     padding: 5px;
     font-size: $reg-text-size;
