@@ -37,6 +37,10 @@ form {
             border-radius: 5px;
             outline: none;
         }
+
+        &[type="date"] {
+            width: 315px;
+        }
     }
 
     .radio {
