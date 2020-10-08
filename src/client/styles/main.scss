@@ -164,6 +164,13 @@ footer {
 
 @media (min-width: 1100px) {
 
+    #forecast-card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1000px) {
+
     #results-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -173,9 +180,5 @@ footer {
     #location-image-container {
         margin-top: auto;
         margin-bottom: auto;
-    }
-
-    #forecast-card-container {
-        grid-template-columns: repeat(3, 1fr);
     }
 }
