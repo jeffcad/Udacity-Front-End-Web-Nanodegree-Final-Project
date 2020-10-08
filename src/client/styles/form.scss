@@ -1,10 +1,8 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
-$focus-colour: powderblue;
+$hover-colour: powderblue;
 $h1-text-size: 3rem;
 $h2-text-size: 2.5rem;
-$header-text-size: 5rem;
-$footer-text-size: 3rem;
 $reg-text-size: 2rem;
 
 form {
@@ -31,10 +29,13 @@ form {
         border: 2px solid $primary-colour;
         border-radius: 5px;
 
-        &:focus,
+        &:focus {
+            border: 5px solid $primary-colour;
+            outline: none;
+        }
+
         &:hover {
-            border: 2px solid $focus-colour;
-            border-radius: 5px;
+            border: 2px solid $hover-colour;
             outline: none;
         }
 
@@ -59,7 +60,7 @@ form {
             transition: 0.3s;
 
             &:hover {
-                border: 9px solid $focus-colour;
+                border: 9px solid $hover-colour;
             }
 
             &:checked {
@@ -88,13 +89,16 @@ form {
         opacity: 0.6;
         transition: 0.3s;
 
-        &:hover,
+        &:hover {
+            opacity: 1;
+        }
+
         &:focus {
             opacity: 1;
         }
 
         &:active {
-            background-color: $focus-colour;
+            background-color: $hover-colour;
         }
     }
 }
