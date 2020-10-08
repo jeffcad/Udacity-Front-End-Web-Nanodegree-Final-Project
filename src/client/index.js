@@ -88,7 +88,6 @@ export {
     const returnDate = document.getElementById('return-date')
     returnDate.setAttribute("min", formattedMinDate)
 
+    const submitButton = document.getElementById('submit-button')
+    submitButton.addEventListener('click', submitted)
 })()
-
-const submitButton = document.getElementById('submit-button')
-submitButton.addEventListener('click', submitted)
