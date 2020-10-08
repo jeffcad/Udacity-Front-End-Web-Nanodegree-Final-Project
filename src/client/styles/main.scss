@@ -3,6 +3,7 @@ $shadow-colour: #803300;
 $focus-colour: powderblue;
 $h1-text-size: 3rem;
 $h2-text-size: 2.5rem;
+$h3-text-size: 2.0rem;
 $header-text-size: 5rem;
 $footer-text-size: 3rem;
 $reg-text-size: 2rem;
@@ -17,10 +18,14 @@ h2 {
     margin: 10px;
 }
 
+h3 {
+    font-size: $h3-text-size;
+}
+
 body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-rows: auto auto auto 1fr auto auto;
     height: 100vh;
     margin: 0;
     text-align: center;
@@ -41,11 +46,24 @@ header {
     margin-top: 30px;
 }
 
-footer {
+#api-logo-container {
     grid-area: 5/1/6/2;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    .logo {
+        height: 50px;
+        margin-bottom: 20px;
+    }
+}
+
+footer {
+    grid-area: 6/1/7/2;
     color: $primary-colour;
     font-size: $footer-text-size;
     padding: 10px;
+    margin-top: 40px;
     text-shadow: 1px 1px 1px $shadow-colour;
 }
 
@@ -60,5 +78,18 @@ footer {
     #location-image-container {
         margin-top: auto;
         margin-bottom: auto;
+    }
+
+    #api-logo-container {
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-around;
+        margin-top: 40px;
+
+        .api-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }
