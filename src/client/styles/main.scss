@@ -118,21 +118,20 @@ form {
 
 #forecast-card-container {
     grid-area: 3/1/4/2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    padding: 10px;
 }
 
 .forecast-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 320px;
     border: 3px solid $primary-colour;
     border-radius: 10px;
     box-shadow: 5px 5px 5px $shadow-colour;
     padding: 5px;
-    margin: 20px;
     font-size: $reg-text-size;
 
     .icon {
@@ -150,4 +149,24 @@ footer {
     font-size: $footer-text-size;
     padding: 10px;
     text-shadow: 1px 1px 1px $shadow-colour;
+}
+
+@media (min-width: 750px) and (max-width: 1099px) {
+    #forecast-card-container {
+        grid-area: 3/1/4/2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 30px;
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1100px) {
+    #forecast-card-container {
+        grid-area: 3/1/4/2;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px;
+        padding: 20px;
+    }
 }
