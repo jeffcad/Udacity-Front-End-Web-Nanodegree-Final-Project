@@ -1,5 +1,4 @@
 $primary-colour: #ff6600;
-$button-colour: #ff944d;
 $shadow-colour: #803300;
 $focus-colour: powderblue;
 $h1-text-size: 3rem;
@@ -10,6 +9,7 @@ $reg-text-size: 2rem;
 
 h1 {
     font-size: $h1-text-size;
+    padding: 0 10px;
 }
 
 h2 {
@@ -61,10 +61,31 @@ form {
     }
 
     .radio {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
         [type="radio"] {
-            margin-left: -5px;
+            appearance: none;
+            margin-bottom: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            vertical-align: middle;
+            border: 2px solid $primary-colour;
+            transition: 0.3s;
+
+            &:hover {
+                border: 9px solid $focus-colour;
+            }
+
+            &:checked {
+                border: 9px solid $primary-colour;
+            }
+
+            &:focus {
+                outline: 2px solid $primary-colour;
+            }
         }
 
         #metric {
@@ -73,16 +94,20 @@ form {
     }
 
     #submit-button {
-        background-color: $button-colour;
+        background-color: $primary-colour;
         color: white;
         cursor: pointer;
         border-color: black;
         border-radius: 10px;
         padding: 0 30px;
+        margin-top: 20px;
         font-size: $reg-text-size;
+        opacity: 0.6;
+        transition: 0.3s;
 
-        &:hover {
-            background-color: $primary-colour;
+        &:hover,
+        &:focus {
+            opacity: 1;
         }
 
         &:active {
