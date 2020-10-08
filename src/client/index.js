@@ -45,9 +45,6 @@ import './icons/t04d.png'
 import './icons/t05d.png'
 import './icons/u00d.png'
 
-const submitButton = document.getElementById('submit-button')
-submitButton.addEventListener('click', submitted)
-
 export {
     submitted,
     getGeonameData,
@@ -56,5 +53,30 @@ export {
     extractCityData,
     extractForecastData,
     extractPhoto,
+
     createForecastCard
 }
+
+(function () {
+    console.log("getTodayDate has been called")
+    const d = new Date()
+    let month = (d.getMonth() + 1).toString()
+    let date = d.getDate().toString()
+    const year = d.getFullYear().toString()
+    if (month.length == 1) {
+        month = "0" + month
+    }
+    if (date.length == 1) {
+        date = "0" + date
+    }
+
+    const formattedDate = `${year}-${month}-${date}`
+    const departureDate = document.getElementById('departure-date')
+    departureDate.setAttribute("min", formattedDate)
+    const returnDate = document.getElementById('return-date')
+    returnDate.setAttribute("min", formattedDate)
+
+})()
+
+const submitButton = document.getElementById('submit-button')
+submitButton.addEventListener('click', submitted)
