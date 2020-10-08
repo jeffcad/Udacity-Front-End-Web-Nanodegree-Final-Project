@@ -43,6 +43,15 @@ form {
     align-items: center;
     font-size: $reg-text-size;
 
+    .destination,
+    .departure,
+    .return,
+    .units {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
     input {
         padding: 5px;
         margin: 5px 20px 20px 20px;
@@ -180,5 +189,33 @@ footer {
     #location-image-container {
         margin-top: auto;
         margin-bottom: auto;
+    }
+}
+
+@media (min-width: 700px) {
+
+    form {
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        
+        input {
+            margin: 0;
+
+            &[type="radio"] {
+                margin-left: 10px;
+            }
+        }
+
+        .destination,
+        .departure,
+        .return,
+        .units {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+        }
     }
 }

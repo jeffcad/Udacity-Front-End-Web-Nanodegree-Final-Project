@@ -11,18 +11,26 @@
 <body>
     <header>🛫Travel Weather Guide🌞</header>
     <form>
-        <label for="destination-city">Destination City</label>
-        <input type="text" id="destination-city" placeholder="Enter destination city">
-        <label for="departure-date">Departure Date</label>
-        <input type="date" id="departure-date">
-        <label for="return-date">Return Date</label>
-        <input type="date" id="return-date">
-        <legend>Select units:</legend>
-        <div class="radio">
-            <label for="metric">Metric</label>
-            <input type="radio" name="units" id="metric" value="metric" checked>
-            <label for="imperial">Imperial</label>
-            <input type="radio" name="units" id="imperial" value="imperial">
+        <div class="destination">
+            <label for="destination-city">Destination City</label>
+            <input type="text" id="destination-city" placeholder="Enter destination city">
+        </div>
+        <div class="departure">
+            <label for="departure-date">Departure Date</label>
+            <input type="date" id="departure-date">
+        </div>
+        <div class="return">
+            <label for="return-date">Return Date</label>
+            <input type="date" id="return-date">
+        </div>
+        <div class="units">
+            <legend>Select units:</legend>
+            <div class="radio">
+                <label for="metric">Metric</label>
+                <input type="radio" name="units" id="metric" value="metric" checked>
+                <label for="imperial">Imperial</label>
+                <input type="radio" name="units" id="imperial" value="imperial">
+            </div>
         </div>
         <input type="submit" id="submit-button">
     </form>
