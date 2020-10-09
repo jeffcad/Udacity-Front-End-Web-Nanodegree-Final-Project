@@ -48,38 +48,23 @@ export async function submitted(event) {
 
 async function apiCalls(bigData) {
 
-    const geonameData = await Client.getGeonameData(bigData.userData.destinationCity)
+    const geonameData = await Client.callServer('callgeo', bigData)
     bigData["cityData"] = Client.extractCityData(geonameData)
     console.log(bigData.cityData)
 
-    const weatherbitData = await Client.getWeatherbitData(bigData.cityData, bigData.userData.units)
+    const weatherbitData = await Client.callServer('callweather', bigData)
     bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData.userData.timeUntilTrip, bigData.userData.timeUntilReturn)
     console.log(bigData.forecastData)
 
-    const photoData = await Client.getPhotoData(bigData.userData.destinationCity)
+    const photoData = await Client.callServer('callphoto', bigData)
     console.log(photoData)
     bigData["photo"] = Client.extractPhoto(photoData)
     console.log(bigData.photo)
 
-    const storeMessage = await storeBigData(bigData)
+    const storeMessage = await Client.callServer('storedata', bigData)
     console.log(storeMessage)
 
     return bigData
-}
-
-async function storeBigData(bigData) {
-    const response = await fetch('http://localhost:8081/storedata', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        // Body data type must match "Content-Type" header        
-        body: JSON.stringify(bigData)
-    })
-
-    const responseJSON = await response.json()
-    return responseJSON
 }
 
 function updateUI(bigData) {

@@ -1,7 +1,5 @@
 import { submitted } from './js/app'
-import { getGeonameData } from './js/apiCalls'
-import { getWeatherbitData } from './js/apiCalls'
-import { getPhotoData } from './js/apiCalls'
+import { callServer } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
 import { extractPhoto } from './js/extractions'
@@ -47,9 +45,7 @@ import './icons/u00d.png'
 
 export {
     submitted,
-    getGeonameData,
-    getWeatherbitData,
-    getPhotoData,
+    callServer,
     extractCityData,
     extractForecastData,
     extractPhoto,

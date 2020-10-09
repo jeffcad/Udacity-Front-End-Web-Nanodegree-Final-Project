@@ -28,7 +28,6 @@ app.use(express.static('dist'))
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.json())
-app.use(bodyParser.text())
 
 // Designates what port the app will listen to for incoming requests
 const port = 8081
@@ -44,8 +43,8 @@ app.get('/',
 app.post('/callgeo', callGeo)
 
 async function callGeo(req, res) {
-    console.log(`Geonames request city is ${req.body}`)
-    const city = req.body
+    console.log(`Geonames request city is ${req.body.userData.destinationCity}`)
+    const city = req.body.userData.destinationCity
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_PARAMS
     console.log(`Geonames URL is ${geonamesURL}`)
     const response = await fetch(geonamesURL)
@@ -74,8 +73,8 @@ async function callWeather(req, res) {
 app.post('/callphoto', callPhoto)
 
 async function callPhoto(req, res) {
-    console.log(`Pixabay request city is ${req.body}`)
-    const city = req.body
+    console.log(`Pixabay request city is ${req.body.userData.destinationCity}`)
+    const city = req.body.userData.destinationCity
     const pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
     console.log(`Pixabay URL is ${pixabayURL}`)
     const response = await fetch(pixabayURL)
