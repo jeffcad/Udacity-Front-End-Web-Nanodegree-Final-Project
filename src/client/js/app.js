@@ -44,8 +44,8 @@ export async function submitted(event) {
     }
 
     let bigData = {}
-    bigData["userData"] = { destinationCity, departureDate, timeUntilTrip, timeUntilReturn, tripDuration, units }
-    console.log(bigData.userData)
+    bigData["userData"] = { destinationCity, departureDate, returnDate, timeUntilTrip, timeUntilReturn, tripDuration, units }
+    console.log(bigData)
 
     bigData = await apiCalls(bigData)
     if (bigData != null) {

@@ -29,6 +29,8 @@ app.use(express.static('dist'))
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.json())
 
+module.exports = app
+
 // Designates what port the app will listen to for incoming requests
 const port = 8081
 app.listen(port,

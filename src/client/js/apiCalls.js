@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 export async function callServer(url, bigData) {
     try {
         const response = await fetch(`http://localhost:8081/${url}`, {
