@@ -7,6 +7,8 @@ const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
     entry: './src/client/index.js',
     mode: 'production',
+    // Outputs all functions to a client library
+    // Necessary only if more than 1 JavaScript file
     output: {
         libraryTarget: 'var',
         library: 'Client'

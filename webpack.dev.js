@@ -6,6 +6,8 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    // Outputs all functions to a client library
+    // Necessary only if more than 1 JavaScript file
     output: {
         libraryTarget: 'var',
         library: 'Client'

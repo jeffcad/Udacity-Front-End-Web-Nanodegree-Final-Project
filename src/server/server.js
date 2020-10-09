@@ -1,6 +1,8 @@
+// Dotenv package allows environment variables to protect API keys
 const dotenv = require('dotenv')
 dotenv.config()
 
+// Set URL pieces for 3 APIs
 const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_URL = `&username=${process.env.GEONAMES_KEY}`
 const GEONAMES_PARAMS = "&maxRows=1"
@@ -13,8 +15,10 @@ const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL = `&key=${process.env.PIXABAY_KEY}`
 const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
 
+// Initialise object that will store all user/API data on server side
 const bigData = []
 
+// All required server boilerplate
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -29,6 +33,7 @@ app.use(express.static('dist'))
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.json())
 
+// This is for testing server endpoints with Jest and Supertest packages
 module.exports = app
 
 // Serves the main page to browser
@@ -36,6 +41,7 @@ app.get('/',
     (req, res) => res.sendFile('dist/index.html')
 )
 
+// Endpoint for the Geonames API
 app.post('/callgeo', callGeo)
 
 async function callGeo(req, res) {
@@ -45,18 +51,21 @@ async function callGeo(req, res) {
     console.log(`Geonames URL is ${geonamesURL}`)
     try {
         const response = await fetch(geonamesURL)
+        // Checks for failed data transfer from API, returns null
         if (!response.ok) {
             console.log(`Error connecting to Geonames API. Response status ${response.status}`)
             res.send(null)
         }
         const responseJSON = await response.json()
         res.send(responseJSON)
+        // If failed connection to API, return null
     } catch (error) {
         console.log(`Error connecting to server: ${error}`)
         res.send(null)
     }
 }
 
+// Endpoint for the Weatherbit API
 app.post('/callweather', callWeather)
 
 async function callWeather(req, res) {
@@ -70,18 +79,21 @@ async function callWeather(req, res) {
     console.log(`Weatherbit URL is ${weatherbitURL}`)
     try {
         const response = await fetch(weatherbitURL)
+        // Checks for failed data transfer from API, returns null
         if (!response.ok) {
             console.log(`Error connecting to Weatherbit API. Response status ${response.status}`)
             res.send(null)
         }
         const responseJSON = await response.json()
         res.send(responseJSON)
+        // If failed connection to API, return null
     } catch (error) {
         console.log(`Error connecting to server: ${error}`)
         res.send(null)
     }
 }
 
+// Endpoint for the Pixabay API
 app.post('/callphoto', callPhoto)
 
 async function callPhoto(req, res) {
@@ -91,17 +103,20 @@ async function callPhoto(req, res) {
     console.log(`Pixabay URL is ${pixabayURL}`)
     try {
         let response = await fetch(pixabayURL)
+        // Checks for failed data transfer from API, returns null
         if (!response.ok) {
             console.log(`Error connecting to Pixabay API. Response status ${response.status}`)
             res.send(null)
         }
         let responseJSON = await response.json()
 
+        // If no photo was returned for city, get one for the country instead
         if (responseJSON.total == 0) {
             const country = req.body.cityData.country
             console.log(`No photo available for ${city}. Finding photo for ${country}.`)
             pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
             response = await fetch(pixabayURL)
+            // Checks for failed data transfer from API, returns null
             if (!response.ok) {
                 console.log(`Error connecting to Pixabay. Response status ${response.status}`)
                 res.send(null)
@@ -110,12 +125,14 @@ async function callPhoto(req, res) {
         }
 
         res.send(responseJSON)
+        // If failed connection to API, return null
     } catch (error) {
         console.log(`Error connecting to server: ${error}`)
         res.send(null)
     }
 }
 
+// Endpoint for the data storage route
 app.post('/storedata', storeData)
 
 function storeData(req, res) {
