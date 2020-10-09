@@ -47,10 +47,18 @@ async function callGeo(req, res) {
     const city = req.body.userData.destinationCity
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_PARAMS
     console.log(`Geonames URL is ${geonamesURL}`)
-    const response = await fetch(geonamesURL)
-    const responseJSON = await response.json()
-
-    res.send(responseJSON)
+    try {
+        const response = await fetch(geonamesURL)
+        if (!response.ok) {
+            console.log(`Error connecting to Geonames API. Response status ${response.status}`)
+            res.send(null)
+        }
+        const responseJSON = await response.json()
+        res.send(responseJSON)
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`)
+        res.send(null)
+    }
 }
 
 app.post('/callweather', callWeather)
@@ -64,10 +72,18 @@ async function callWeather(req, res) {
     const units = req.body.units
     const weatherbitURL = WEATHERBIT_ROOT + locationURL + WEATHERBIT_KEY_URL + WEATHERBIT_PARAMS + units
     console.log(`Weatherbit URL is ${weatherbitURL}`)
-    const response = await fetch(weatherbitURL)
-    const responseJSON = await response.json()
-
-    res.send(responseJSON)
+    try {
+        const response = await fetch(weatherbitURL)
+        if (!response.ok) {
+            console.log(`Error connecting to Weatherbit API. Response status ${response.status}`)
+            res.send(null)
+        }
+        const responseJSON = await response.json()
+        res.send(responseJSON)
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`)
+        res.send(null)
+    }
 }
 
 app.post('/callphoto', callPhoto)
@@ -77,18 +93,31 @@ async function callPhoto(req, res) {
     const city = req.body.userData.destinationCity
     let pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
     console.log(`Pixabay URL is ${pixabayURL}`)
-    let response = await fetch(pixabayURL)
-    let responseJSON = await response.json()
+    try {
+        let response = await fetch(pixabayURL)
+        if (!response.ok) {
+            console.log(`Error connecting to Pixabay API. Response status ${response.status}`)
+            res.send(null)
+        }
+        let responseJSON = await response.json()
 
-    if (responseJSON.total == 0) {
-        const country = req.body.cityData.country
-        console.log(`No photo available for ${city}. Finding photo for ${country}.`)
-        pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
-        response = await fetch(pixabayURL)
-        responseJSON = await response.json()
+        if (responseJSON.total == 0) {
+            const country = req.body.cityData.country
+            console.log(`No photo available for ${city}. Finding photo for ${country}.`)
+            pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
+            response = await fetch(pixabayURL)
+            if (!response.ok) {
+                console.log(`Error connecting to Pixabay. Response status ${response.status}`)
+                res.send(null)
+            }
+            responseJSON = await response.json()
+        }
+
+        res.send(responseJSON)
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`)
+        res.send(null)
     }
-
-    res.send(responseJSON)
 }
 
 app.post('/storedata', storeData)

@@ -55,9 +55,14 @@ export async function submitted(event) {
 
 async function apiCalls(bigData) {
 
+    const errorMessage = document.getElementById('error-message')
+    const serverError = "Couldn't connect to server. Try again later."
+
     const geonamesData = await Client.callServer('callgeo', bigData)
-    if (geonamesData.geonames.length == 0) {
-        const errorMessage = document.getElementById('error-message')
+    if (geonamesData == null) {
+        errorMessage.innerHTML = serverError
+        return null
+    } else if (geonamesData.geonames.length == 0) {
         errorMessage.innerHTML = `The lookup service can't find ${bigData.userData.destinationCity}. Please check the spelling and try again.`
         return null
     }
@@ -65,11 +70,18 @@ async function apiCalls(bigData) {
     console.log(bigData.cityData)
 
     const weatherbitData = await Client.callServer('callweather', bigData)
+    if (weatherbitData == null) {
+        errorMessage.innerHTML = serverError
+        return null
+    }
     bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData.userData.timeUntilTrip, bigData.userData.timeUntilReturn)
     console.log(bigData.forecastData)
 
     const photoData = await Client.callServer('callphoto', bigData)
-    console.log(photoData)
+    if (photoData == null) {
+        errorMessage.innerHTML = serverError
+        return null
+    }
     bigData["photo"] = Client.extractPhoto(photoData)
     console.log(bigData.photo)
 
@@ -107,5 +119,4 @@ function updateUI(bigData) {
     const forecastCardContainer = document.getElementById('forecast-card-container')
     forecastCardContainer.innerHTML = ""
     forecastCardContainer.append(fragment)
-
 }
