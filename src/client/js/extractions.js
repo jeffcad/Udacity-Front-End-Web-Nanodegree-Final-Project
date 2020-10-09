@@ -7,13 +7,13 @@ export function extractCityData(geonameData) {
     return { latitude, longitude, country, population }
 }
 
-export function extractForecastData(weatherbitData, timeUntilTrip, tripDuration) {
+export function extractForecastData(weatherbitData, timeUntilTrip, timeUntilReturn) {
     const forecastData = []
 
     // counter max is 15 because API currently returns max 16 days data
     let lastForecastDay = 15
-    if ((timeUntilTrip + tripDuration) < 15) {
-        lastForecastDay = timeUntilTrip + tripDuration
+    if (timeUntilReturn < 15) {
+        lastForecastDay = timeUntilReturn
     }
     for (let i = timeUntilTrip; i <= lastForecastDay; i++) {
         const date = weatherbitData.data[i].valid_date

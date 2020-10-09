@@ -4,8 +4,19 @@ export async function submitted(event) {
     event.preventDefault()
     console.log('Event listener connected')
 
+    const errorMessage = document.getElementById('error-message')
+    errorMessage.innerHTML = ""
+    document.getElementById('forecast-card-container').innerHTML = ""
+    document.getElementById('how-many-sleeps').innerHTML = ""
+    document.getElementById('location-image-container').innerHTML = ""
+    document.getElementById('forecast-title').innerHTML = ""
+
     const destinationCity = document.getElementById('destination-city').value
     console.log(`City: ${destinationCity}`)
+    if (destinationCity == "") {
+        errorMessage.innerHTML = "Please enter a destination city"
+        return
+    }
 
     const departureDate = document.getElementById('departure-date').value
     console.log(`Departure date: ${departureDate}`)
@@ -16,6 +27,10 @@ export async function submitted(event) {
     console.log(`Days until departure: ${timeUntilTrip}`)
     const timeUntilReturn = countdown(null, new Date(returnDate), countdown.DAYS).days
     const tripDuration = timeUntilReturn - timeUntilTrip
+    if (tripDuration < 0) {
+        errorMessage.innerHTML = "Return date can't be before departure date"
+        return
+    }
 
     const unitsInput = document.querySelector('input[name="units"]:checked').value
     let units = "M"
@@ -38,7 +53,7 @@ async function apiCalls(bigData) {
     console.log(bigData.cityData)
 
     const weatherbitData = await Client.getWeatherbitData(bigData.cityData, bigData.userData.units)
-    bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData.userData.timeUntilTrip, bigData.userData.tripDuration)
+    bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData.userData.timeUntilTrip, bigData.userData.timeUntilReturn)
     console.log(bigData.forecastData)
 
     const photoData = await Client.getPhotoData(bigData.userData.destinationCity)

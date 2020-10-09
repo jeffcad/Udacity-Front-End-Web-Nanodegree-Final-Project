@@ -10,20 +10,20 @@
 
 <body>
     <header>🛫Travel Weather Guide🌞</header>
-    <form>
-        <div class="destination">
+    <form id="input-form">
+        <div id="destination">
             <label for="destination-city">Destination City</label>
             <input type="text" id="destination-city" placeholder="Enter destination city">
         </div>
-        <div class="departure">
+        <div id="departure">
             <label for="departure-date">Departure Date</label>
             <input type="date" id="departure-date">
         </div>
-        <div class="return">
+        <div id="return">
             <label for="return-date">Return Date</label>
             <input type="date" id="return-date">
         </div>
-        <div class="units">
+        <div id="units">
             <legend>Select units:</legend>
             <div class="radio">
                 <label for="metric">Metric</label>
@@ -33,6 +33,7 @@
             </div>
         </div>
         <input type="submit" id="submit-button">
+        <h3 id="error-message"></h3>
     </form>
     <section id="results-container">
         <h1 id="how-many-sleeps"></h1>

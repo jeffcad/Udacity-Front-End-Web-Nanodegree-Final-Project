@@ -5,17 +5,17 @@ $h1-text-size: 3rem;
 $h2-text-size: 2.5rem;
 $reg-text-size: 2rem;
 
-form {
+#input-form {
     grid-area: 2/1/3/2;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: $reg-text-size;
 
-    .destination,
-    .departure,
-    .return,
-    .units {
+    #destination,
+    #departure,
+    #return,
+    #units {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -101,11 +101,15 @@ form {
             background-color: $hover-colour;
         }
     }
+
+    #error-message {
+        color: red;
+    }
 }
 
 @media (min-width: 700px) {
 
-    form {
+    #input-form {
         width: 600px;
         margin-left: auto;
         margin-right: auto;
@@ -119,10 +123,10 @@ form {
             }
         }
 
-        .destination,
-        .departure,
-        .return,
-        .units {
+        #destination,
+        #departure,
+        #return,
+        #units {
             flex-direction: row;
             justify-content: space-between;
             width: 100%;
