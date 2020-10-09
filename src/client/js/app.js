@@ -20,6 +20,11 @@ export async function submitted(event) {
 
     const departureDate = document.getElementById('departure-date').value
     console.log(`Departure date: ${departureDate}`)
+    if (departureDate == "") {
+        errorMessage.innerHTML = "Please enter a departure date"
+        return
+    }
+
     const returnDate = document.getElementById('return-date').value
     console.log(`Return date: ${returnDate}`)
 
@@ -43,7 +48,9 @@ export async function submitted(event) {
     console.log(bigData.userData)
 
     bigData = await apiCalls(bigData)
-    updateUI(bigData)
+    if (bigData != null) {
+        updateUI(bigData)
+    }
 }
 
 async function apiCalls(bigData) {
@@ -51,8 +58,8 @@ async function apiCalls(bigData) {
     const geonamesData = await Client.callServer('callgeo', bigData)
     if (geonamesData.geonames.length == 0) {
         const errorMessage = document.getElementById('error-message')
-        errorMessage.innerHTML = "The lookup service can't find this destination. Please check the spelling and try again."
-        return
+        errorMessage.innerHTML = `The lookup service can't find ${bigData.userData.destinationCity}. Please check the spelling and try again.`
+        return null
     }
     bigData["cityData"] = Client.extractCityData(geonamesData)
     console.log(bigData.cityData)
