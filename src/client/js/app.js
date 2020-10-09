@@ -48,8 +48,13 @@ export async function submitted(event) {
 
 async function apiCalls(bigData) {
 
-    const geonameData = await Client.callServer('callgeo', bigData)
-    bigData["cityData"] = Client.extractCityData(geonameData)
+    const geonamesData = await Client.callServer('callgeo', bigData)
+    if (geonamesData.geonames.length == 0) {
+        const errorMessage = document.getElementById('error-message')
+        errorMessage.innerHTML = "The lookup service can't find this destination. Please check the spelling and try again."
+        return
+    }
+    bigData["cityData"] = Client.extractCityData(geonamesData)
     console.log(bigData.cityData)
 
     const weatherbitData = await Client.callServer('callweather', bigData)
