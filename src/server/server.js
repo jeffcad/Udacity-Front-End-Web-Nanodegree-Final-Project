@@ -75,10 +75,18 @@ app.post('/callphoto', callPhoto)
 async function callPhoto(req, res) {
     console.log(`Pixabay request city is ${req.body.userData.destinationCity}`)
     const city = req.body.userData.destinationCity
-    const pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
+    let pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
     console.log(`Pixabay URL is ${pixabayURL}`)
-    const response = await fetch(pixabayURL)
-    const responseJSON = await response.json()
+    let response = await fetch(pixabayURL)
+    let responseJSON = await response.json()
+
+    if (responseJSON.total == 0) {
+        const country = req.body.cityData.country
+        console.log(`No photo available for ${city}. Finding photo for ${country}.`)
+        pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
+        response = await fetch(pixabayURL)
+        responseJSON = await response.json()
+    }
 
     res.send(responseJSON)
 }
