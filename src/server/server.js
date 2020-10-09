@@ -31,12 +31,6 @@ app.use(bodyParser.json())
 
 module.exports = app
 
-// Designates what port the app will listen to for incoming requests
-const port = 8081
-app.listen(port,
-    () => console.log(`Travel weather app listening on port ${port}!`)
-)
-
 // Serves the main page to browser
 app.get('/',
     (req, res) => res.sendFile('dist/index.html')
