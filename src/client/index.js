@@ -1,5 +1,5 @@
 import { submitted } from './js/app'
-import { callServer } from './js/apiCalls'
+import { apiCalls } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
 import { extractPhoto } from './js/extractions'
@@ -45,7 +45,7 @@ import './icons/u00d.png'
 
 export {
     submitted,
-    callServer,
+    apiCalls,
     extractCityData,
     extractForecastData,
     extractPhoto,
