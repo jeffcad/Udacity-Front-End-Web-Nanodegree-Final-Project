@@ -119,8 +119,9 @@ function updateUI(bigData) {
     forecastCardContainer.append(fragment)
 }
 
-
-if (localStorage.bigData) {
-    const bigData = JSON.parse(localStorage.getItem('bigData'))
-    updateUI(bigData)
+export function checkLocalStorage(event) {
+    if (localStorage.bigData) {
+        const bigData = JSON.parse(localStorage.getItem('bigData'))
+        updateUI(bigData)
+    }
 }

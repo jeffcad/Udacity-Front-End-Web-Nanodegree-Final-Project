@@ -3,6 +3,7 @@
 
 // Import functions from other files
 import { submitted } from './js/app'
+import { checkLocalStorage } from './js/app'
 import { apiCalls } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
@@ -101,4 +102,7 @@ export {
     // Add click listener on submit button
     const submitButton = document.getElementById('submit-button')
     submitButton.addEventListener('click', submitted)
+
+    // Add listener to update the UI from local storage if it exists
+    window.addEventListener('load', checkLocalStorage)
 })()
