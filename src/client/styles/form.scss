@@ -92,6 +92,7 @@ $reg-text-size: 2rem;
 
         &:focus {
             opacity: 1;
+            border: 5px solid black;
         }
 
         &:active {
