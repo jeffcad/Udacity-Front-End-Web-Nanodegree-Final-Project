@@ -69,6 +69,9 @@ export async function submitted(event) {
     if (bigData != null) {
         updateUI(bigData)
     }
+
+    // Add all data to local storage
+    localStorage.setItem('bigData', JSON.stringify(bigData))
 }
 
 /**
@@ -114,4 +117,10 @@ function updateUI(bigData) {
     const forecastCardContainer = document.getElementById('forecast-card-container')
     forecastCardContainer.innerHTML = ""
     forecastCardContainer.append(fragment)
+}
+
+
+if (localStorage.bigData) {
+    const bigData = JSON.parse(localStorage.getItem('bigData'))
+    updateUI(bigData)
 }
