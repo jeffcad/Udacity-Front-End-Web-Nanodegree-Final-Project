@@ -40,11 +40,30 @@ export async function submitted(event) {
     const returnDate = document.getElementById('return-date').value
     console.log(`Return date: ${returnDate}`)
 
-    // Trip countdown, checks that return is not before departure
-    const timeUntilTrip = countdown(null, new Date(departureDate), countdown.DAYS).days
+    // Trip countdown. Checks that return is not before departure.
+    // Use millisecond times for today, departure and return.
+    // Set hours to 1 on all 3 times, because if hours difference is
+    // greater than 12, rounding error can occur. In testing, after 21:00
+    // my time, if departure date was today, the difference between Date()
+    // and Date(departureDate) would be -1 days. The difference between 
+    // today and tomorrow would be 0 days. I want the program to strictly 
+    // follow calendar dates, because it screwed up the forecast dates 
+    // and trip duration calculations. The countdown function also
+    // introduced a rounding error if straight dates were used in testing 
+    // after 21:00, due to it assuming the time on departure and return 
+    // dates is 09:00.
+    const todayMilliseconds = (new Date()).setHours(1)
+
+    const departureDateMilliseconds = (new Date(departureDate)).setHours(1)
+    const timeUntilTrip = countdown(todayMilliseconds, departureDateMilliseconds, countdown.DAYS).days
     console.log(`Days until departure: ${timeUntilTrip}`)
-    const timeUntilReturn = countdown(null, new Date(returnDate), countdown.DAYS).days
+
+    const returnDateMilliseconds = (new Date(returnDate)).setHours(1)
+    const timeUntilReturn = countdown(todayMilliseconds, returnDateMilliseconds, countdown.DAYS).days
+    console.log(`Days until return: ${timeUntilReturn}`)
+
     const tripDuration = timeUntilReturn - timeUntilTrip
+    console.log(`Trip duration: ${tripDuration}`)
     if (tripDuration < 0) {
         errorMessage.innerHTML = "Return date can't be before departure date"
         return
