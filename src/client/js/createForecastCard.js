@@ -49,7 +49,7 @@ export function createForecastCard(forecast, units) {
         default:
             dayOfWeek = ""
     }
-    dateDiv.innerHTML = `<h2 class="card-date">${forecast.date}<br>${dayOfWeek}</h2>`
+    dateDiv.innerHTML = `<h3 class="card-date">${forecast.date}<br>${dayOfWeek}</h3>`
 
     // Create icon div, link to icon image
     const icon = document.createElement('img')

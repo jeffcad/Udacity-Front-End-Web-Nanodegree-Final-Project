@@ -1,25 +1,31 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
-$h1-text-size: 3rem;
-$h2-text-size: 2.5rem;
-$h3-text-size: 2.0rem;
-$header-text-size: 5rem;
-$footer-text-size: 3rem;
-$reg-text-size: 2rem;
+$h1-font-size: 5rem;
+$h2-font-size: 3rem;
+$h3-font-size: 2.5rem;
+$h4-font-size: 2rem;
+$footer-font-size: 3rem;
+$reg-font-size: 2rem;
 
 h1 {
-    font-size: $h1-text-size;
-    padding: 0 10px;
+    font-size: $h1-font-size;
 }
 
 h2 {
-    font-size: $h2-text-size;
-    margin: 10px;
+    font-size: $h2-font-size;
+    padding: 0 10px;
 }
 
 h3 {
-    font-size: $h3-text-size;
+    font-size: $h3-font-size;
+    margin: 10px;
 }
+
+h4 {
+    font-size: $h4-font-size;
+}
+
+
 
 body {
     display: grid;
@@ -34,7 +40,6 @@ body {
 header {
     grid-area: 1/1/2/2;
     color: $primary-colour;
-    font-size: $header-text-size;
     padding: 10px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 2px $shadow-colour;
@@ -60,7 +65,7 @@ header {
 footer {
     grid-area: 6/1/7/2;
     color: $primary-colour;
-    font-size: $footer-text-size;
+    font-size: $footer-font-size;
     padding: 10px;
     margin-top: 40px;
     text-shadow: 1px 1px 1px $shadow-colour;

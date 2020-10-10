@@ -4,12 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Travel weather app">
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <title>Travel Weather App</title>
 </head>
 
 <body>
-    <header>🛫Travel Weather Guide🌞</header>
+    <header>
+        <h1>🛫Travel Weather Guide🌞</h1>
+    </header>
     <form id="input-form" class="input-form">
         <div id="destination" class="user-input">
             <label for="destination-city">Destination City</label>
@@ -33,16 +36,16 @@
             </div>
         </div>
         <input type="submit" id="submit-button" class="submit-button">
-        <h3 id="error-message" class="error-message"></h3>
+        <div id="error-message" class="error-message"></div>
     </form>
     <section id="results-container" class="results-container">
-        <h1 id="how-many-sleeps"></h1>
+        <h2 id="how-many-sleeps"></h2>
         <div id="location-image-container" class="location-image-container"></div>
-        <h1 id="forecast-title"></h1>
+        <h2 id="forecast-title"></h2>
     </section>
     <section id="forecast-card-container" class="forecast-card-container"></section>
     <section id="api-logo-container" class="api-logo-container">
-        <h3>Powered by these APIs:</h3>
+        <h4>Powered by these APIs:</h4>
         <a class="api-link" href="http://www.geonames.org/" target="blank"><img class="logo"
                 src="../api-logos/geonames-logo.jpg" alt="Geonames API logo"></a>
         <a class="api-link" href="https://www.weatherbit.io/" target="blank"><img class="logo"
