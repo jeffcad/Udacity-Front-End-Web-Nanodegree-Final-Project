@@ -48,7 +48,12 @@ http://localhost:8081/
 ```
 The app takes 4 user parameters:
 
-* **Destination city (required)** - The city/location where you'll travel to. App will return an error if the API can't find it. Not case-sensitive, but spelling is important.
+* **Destination city (required)** - The city/location where you'll travel to. App will return an error if the API can't find it. Not case-sensitive, but spelling is important. If your entry is returning a place with the same name in a different country, you can add the country to the input box, for example:
+
+```
+Sydney Canada
+```
+
 * **Departure date (required)** - You can choose any date from today until 15 days from now. The weather forecast API has a limit of 16 days, so if your trip departs after this, please check back closer to your departure date.
 * **Return date (optional)** - You can enter any date on or after your departure date. If no date is selected, the app will default to show as many days into the future as it can. The limit is 15 days from today (16 days including today).
 * **Units (required, default *metric*)** - You can choose metric or imperial units:

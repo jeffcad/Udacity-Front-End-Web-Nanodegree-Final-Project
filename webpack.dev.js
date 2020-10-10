@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
     entry: './src/client/index.js',
@@ -24,7 +25,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
-                test: /\.png$|\.jpg$/,
+                test: /\.png$|\.jpg$|\.ico$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
@@ -51,5 +52,6 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
+        new FaviconsWebpackPlugin('./src/client/icons/favicon.ico'),
     ]
 }
