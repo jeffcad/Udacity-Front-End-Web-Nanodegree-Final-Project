@@ -10,20 +10,20 @@
 
 <body>
     <header>🛫Travel Weather Guide🌞</header>
-    <form id="input-form">
-        <div id="destination">
+    <form id="input-form" class="input-form">
+        <div id="destination" class="user-input">
             <label for="destination-city">Destination City</label>
             <input type="text" id="destination-city" placeholder="Enter destination city">
         </div>
-        <div id="departure">
+        <div id="departure" class="user-input">
             <label for="departure-date">Departure Date</label>
             <input type="date" id="departure-date">
         </div>
-        <div id="return">
+        <div id="return" class="user-input">
             <label for="return-date">Return Date</label>
             <input type="date" id="return-date">
         </div>
-        <div id="units">
+        <div id="units" class="user-input">
             <legend>Select units:</legend>
             <div class="radio">
                 <label for="metric">Metric</label>
@@ -32,16 +32,16 @@
                 <input type="radio" name="units" id="imperial" value="imperial">
             </div>
         </div>
-        <input type="submit" id="submit-button">
-        <h3 id="error-message"></h3>
+        <input type="submit" id="submit-button" class="submit-button">
+        <h3 id="error-message" class="error-message"></h3>
     </form>
-    <section id="results-container">
+    <section id="results-container" class="results-container">
         <h1 id="how-many-sleeps"></h1>
-        <div id="location-image-container"></div>
+        <div id="location-image-container" class="location-image-container"></div>
         <h1 id="forecast-title"></h1>
     </section>
-    <section id=forecast-card-container></section>
-    <section id="api-logo-container">
+    <section id="forecast-card-container" class="forecast-card-container"></section>
+    <section id="api-logo-container" class="api-logo-container">
         <h3>Powered by these APIs:</h3>
         <a class="api-link" href="http://www.geonames.org/" target="blank"><img class="logo"
                 src="../api-logos/geonames-logo.jpg" alt="Geonames API logo"></a>
