@@ -84,3 +84,5 @@ The app returns a forecast card for each date of the trip, up until a maximum of
 * wind speed
 * wind direction in degrees
 
+The app uses the browser's local storage to save the last set of data that was entered, including the trip destination and weather forecast. This information should load when you come back to the page. It can be overwritten with a new set of data if you enter new values and press the **Submit** button again. If you want to clear the storage and start fresh, click the **Clear Saved Data** button, which will clear local storage and reload the page.
+

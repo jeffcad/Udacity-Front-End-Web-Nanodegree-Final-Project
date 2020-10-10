@@ -4,6 +4,7 @@
 // Import functions from other files
 import { submitted } from './js/app'
 import { checkLocalStorage } from './js/app'
+import { clearLocalStorage } from './js/app'
 import { apiCalls } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
@@ -105,4 +106,9 @@ export {
 
     // Add listener to update the UI from local storage if it exists
     window.addEventListener('load', checkLocalStorage)
+
+    // Add click listener to Clear Data button to erase local storage
+    const clearButton = document.getElementById('clear-button')
+    clearButton.addEventListener('click', clearLocalStorage)
+
 })()

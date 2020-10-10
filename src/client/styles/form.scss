@@ -72,14 +72,14 @@ $reg-font-size: 2rem;
         }
     }
 
-    .submit-button {
+    .button {
         background-color: $primary-colour;
         color: white;
         cursor: pointer;
         border-color: black;
         border-radius: 10px;
-        padding: 0 30px;
         margin-top: 20px;
+        width: 270px;
         font-size: $reg-font-size;
         box-shadow: 2px 2px 4px $shadow-colour;
         opacity: 0.6;
