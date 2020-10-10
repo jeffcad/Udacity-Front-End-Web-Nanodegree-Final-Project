@@ -29,20 +29,24 @@ export async function submitted(event) {
 
     // Departure date
     const departureDate = document.getElementById('departure-date').value
-    console.log(`Departure date: ${departureDate}`)
     if (departureDate == "") {
         errorMessage.innerHTML = "Please enter a departure date"
         return
     }
+    console.log(`Departure date: ${departureDate}`)
 
     // Return date
     // Not required, will just give full forecast results if left blank
     const returnDate = document.getElementById('return-date').value
+    if (returnDate == "") {
+        errorMessage.innerHTML = "Please enter a return date"
+        return
+    }
     console.log(`Return date: ${returnDate}`)
 
     // Trip countdown. Checks that return is not before departure.
     // Use millisecond times for today, departure and return.
-    // Set hours to 1 on all 3 times, because if hours difference is
+    // Set hours to 1 (1am) on all 3 times, because if hours difference is
     // greater than 12, rounding error can occur. In testing, after 21:00
     // my time, if departure date was today, the difference between Date()
     // and Date(departureDate) would be -1 days. The difference between 
