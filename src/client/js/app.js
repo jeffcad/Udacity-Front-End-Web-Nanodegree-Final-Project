@@ -81,6 +81,7 @@ export async function submitted(event) {
     localStorage.setItem('bigData', JSON.stringify(bigData))
 }
 
+
 /**
  * Trip countdown. Checks that return is not before departure.
  * Use millisecond times for today, departure and return.
@@ -104,20 +105,23 @@ function getTimeUntilDate(date) {
     return timeUntilDate
 }
 
+
 /**
  * Updates the UI elements
  * @param {object} bigData data acquired so far from user and APIs
  */
-function updateUI(bigData) {
+export function updateUI(bigData) {
 
     // Countdown display
+    let messageEnd;
     if (bigData.userData.timeUntilTrip == 0) {
-        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is today! Are you ready to go?`
+        messageEnd = "is today! Are you ready to go?"
     } else if (bigData.userData.timeUntilTrip == 1) {
-        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is tomorrow! Are you packed?`
+        messageEnd = "is tomorrow! Are you packed?"
     } else {
-        document.getElementById('how-many-sleeps').innerHTML = `Your trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} is coming up in ${bigData.userData.timeUntilTrip} days!`
+        messageEnd = `is coming up in ${bigData.userData.timeUntilTrip} days!`
     }
+    document.getElementById('how-many-sleeps').innerHTML = `Your ${bigData.userData.tripDuration + 1}-day trip to ${bigData.userData.destinationCity}, ${bigData.cityData.country} ${messageEnd}`
 
     document.getElementById('forecast-title').innerHTML = "Here is the forecast for your trip:"
 
@@ -147,24 +151,4 @@ function updateUI(bigData) {
     const forecastCardContainer = document.getElementById('forecast-card-container')
     forecastCardContainer.innerHTML = ""
     forecastCardContainer.append(fragment)
-}
-
-/**
- * Loads data from local storage on page load and calls to update the UI
- * @param {load event} event Fires when page is finished loading
- */
-export function checkLocalStorage(event) {
-    if (localStorage.bigData) {
-        const bigData = JSON.parse(localStorage.getItem('bigData'))
-        updateUI(bigData)
-    }
-}
-
-/**
- * Clears data from local storage and reloads page if user clicks button
- * @param {click event} event Fires when clear button is clicked
- */
-export function clearLocalStorage(event) {
-    localStorage.clear()
-    location.reload()
 }

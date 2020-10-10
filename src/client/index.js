@@ -3,8 +3,9 @@
 
 // Import functions from other files
 import { submitted } from './js/app'
-import { checkLocalStorage } from './js/app'
-import { clearLocalStorage } from './js/app'
+import { updateUI } from './js/app'
+import { checkLocalStorage } from './js/localStorage'
+import { clearLocalStorage } from './js/localStorage'
 import { apiCalls } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
@@ -53,6 +54,9 @@ import './icons/u00d.png'
 // Export functions to Client library (see webpack.dev and webpack.prod files)
 export {
     submitted,
+    updateUI,
+    checkLocalStorage,
+    clearLocalStorage,
     apiCalls,
     extractCityData,
     extractForecastData,
