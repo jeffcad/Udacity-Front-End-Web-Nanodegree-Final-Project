@@ -44,26 +44,10 @@ export async function submitted(event) {
     }
     console.log(`Return date: ${returnDate}`)
 
-    // Trip countdown. Checks that return is not before departure.
-    // Use millisecond times for today, departure and return.
-    // Set hours to 1 (1am) on all 3 times, because if hours difference is
-    // greater than 12, rounding error can occur. In testing, after 21:00
-    // my time, if departure date was today, the difference between Date()
-    // and Date(departureDate) would be -1 days. The difference between 
-    // today and tomorrow would be 0 days. I want the program to strictly 
-    // follow calendar dates, because it screwed up the forecast dates 
-    // and trip duration calculations. The countdown function also
-    // introduced a rounding error if straight dates were used in testing 
-    // after 21:00, due to it assuming the time on departure and return 
-    // dates is 09:00.
-    const todayMilliseconds = (new Date()).setHours(1)
-
-    const departureDateMilliseconds = (new Date(departureDate)).setHours(1)
-    const timeUntilTrip = countdown(todayMilliseconds, departureDateMilliseconds, countdown.DAYS).days
+    const timeUntilTrip = getTimeUntilDate(departureDate)
     console.log(`Days until departure: ${timeUntilTrip}`)
 
-    const returnDateMilliseconds = (new Date(returnDate)).setHours(1)
-    const timeUntilReturn = countdown(todayMilliseconds, returnDateMilliseconds, countdown.DAYS).days
+    const timeUntilReturn = getTimeUntilDate(returnDate)
     console.log(`Days until return: ${timeUntilReturn}`)
 
     const tripDuration = timeUntilReturn - timeUntilTrip
@@ -95,6 +79,29 @@ export async function submitted(event) {
 
     // Add all data to local storage
     localStorage.setItem('bigData', JSON.stringify(bigData))
+}
+
+/**
+ * Trip countdown. Checks that return is not before departure.
+ * Use millisecond times for today, departure and return.
+ * Set hours to 1 (1am) on all 3 times, because if hours difference is
+ * greater than 12, rounding error can occur. In testing, after 21:00
+ * my time, if departure date was today, the difference between Date()
+ * and Date(departureDate) would be -1 days. The difference between 
+ * today and tomorrow would be 0 days. I want the program to strictly 
+ * follow calendar dates, because it screwed up the forecast dates 
+ * and trip duration calculations. The countdown function also
+ * introduced a rounding error if straight dates were used in testing 
+ * after 21:00, due to it assuming the time on departure and return 
+ * dates is 09:00.
+ * @param {string} date A date in the format yyyy-mm-dd
+ */
+function getTimeUntilDate(date) {
+    const todayMilliseconds = (new Date()).setHours(1)
+
+    const dateMilliseconds = (new Date(date)).setHours(1)
+    const timeUntilDate = countdown(todayMilliseconds, dateMilliseconds, countdown.DAYS).days
+    return timeUntilDate
 }
 
 /**
