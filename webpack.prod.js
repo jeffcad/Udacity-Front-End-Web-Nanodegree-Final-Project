@@ -27,7 +27,7 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
-                test: /\.png$|\.jpg$|\.ico$/,
+                test: /\.png$|\.jpg$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
@@ -56,7 +56,10 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({ filename: "[name].css" }),
         new WorkboxPlugin.GenerateSW(),
-        new FaviconsWebpackPlugin('./src/client/icons/favicon.ico'),
+        new FaviconsWebpackPlugin({
+            logo: './src/client/icons/favicon.ico',
+            mode: 'light',
+        }),
     ],
     optimization: {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
