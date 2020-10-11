@@ -13,7 +13,7 @@ const WEATHERBIT_PARAMS = "&units="
 
 const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL = `&key=${process.env.PIXABAY_KEY}`
-const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&category=places&per_page=200"
+const PIXABAY_PARAMS = "&image_type=photo&orientation=horizontal&safesearch=true&per_page=100"
 
 // Initialise object that will store all user/API data on server side
 const bigData = []
@@ -115,6 +115,7 @@ async function callPhoto(req, res) {
             const country = req.body.cityData.country
             console.log(`No photo available for ${city}. Finding photo for ${country}.`)
             pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
+            console.log(`Pixabay country search URL is ${pixabayURL}`)
             response = await fetch(pixabayURL)
             // Checks for failed data transfer from API, returns null
             if (!response.ok) {

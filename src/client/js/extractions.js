@@ -29,7 +29,8 @@ export function extractForecastData(weatherbitData, bigData) {
 
     // Checks if there is a mismatch between local time of user and local time 
     // at destination, adjusts dates accordingly
-    bigData["todayFinishedAtDestination"] = false
+    bigData["departFinishedAtDestination"] = false
+    bigData["returnFinishedAtDestination"] = false
     if (!(departureDate == weatherbitData.data[timeUntilTrip].valid_date)) {
         console.log(`Date difference between user and destination detected!`)
         // If departure date matches the next element in the forecast array, 
@@ -47,10 +48,16 @@ export function extractForecastData(weatherbitData, bigData) {
             } else {
                 // User leaves today but today's date is finished
                 // at destination
-                bigData.todayFinishedAtDestination = true
+                bigData.departFinishedAtDestination = true
+                console.log("departFinishedAtDestination is true")
             }
             if (timeUntilReturn > 0) {
                 timeUntilReturn -= 1
+            } else {
+                // User returns today but today's date is finished
+                // at destination
+                bigData.returnFinishedAtDestination = true
+                console.log("FinishedAtDestination is true")
             }
         }
     }
@@ -90,8 +97,8 @@ export function extractMostLikedPhoto(photoData) {
     let topLikes = 0
     let chosenPhoto = ""
     // Largest value of a "page" in returned photo results
-    let count = 200
-    // Set count lower if fewer than 200 results were returned
+    let count = 100
+    // Set count lower if fewer than count results were returned
     if (photoData.totalHits < count) {
         count = photoData.totalHits
     }
@@ -112,10 +119,15 @@ export function extractMostLikedPhoto(photoData) {
  * @param {object} photoData Data returned from Pixabay API
  */
 export function extractRandomPhoto(photoData) {
-    const numberOfPhotos = photoData.totalHits
+    // Largest value of a "page" in returned photo results
+    let count = 100
+    // Set count lower if fewer than count results were returned
+    if (photoData.totalHits < count) {
+        count = photoData.totalHits
+    }
     // Use numberOfPhotos-1 because this will be an array index
-    const randomNumber = Math.round(Math.random() * (numberOfPhotos - 1))
-    console.log(`Random photo chosen #${randomNumber + 1} of ${numberOfPhotos}`)
+    const randomNumber = Math.round(Math.random() * (count - 1))
+    console.log(`Random photo chosen #${randomNumber + 1} of ${count}`)
     const randomPhoto = photoData.hits[randomNumber].webformatURL
 
     return randomPhoto
