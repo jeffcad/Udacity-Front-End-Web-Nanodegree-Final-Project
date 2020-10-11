@@ -22,6 +22,7 @@ export function extractForecastData(weatherbitData, bigData) {
     // An array to hold objects each representing 1 day of forecast data
     const forecastData = []
 
+    // Define these here just to shorten the references to them
     let timeUntilTrip = bigData.userData.timeUntilTrip
     let timeUntilReturn = bigData.userData.timeUntilReturn
     const departureDate = bigData.userData.departureDate
