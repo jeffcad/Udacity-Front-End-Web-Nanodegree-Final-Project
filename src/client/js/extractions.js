@@ -17,10 +17,37 @@ export function extractCityData(geonamesData) {
  * @param {integer} timeUntilTrip Number of days until trip start date
  * @param {integer} timeUntilReturn Number of days until trip end date
  */
-export function extractForecastData(weatherbitData, timeUntilTrip, timeUntilReturn) {
+export function extractForecastData(weatherbitData, bigData) {
 
     // An array to hold objects each representing 1 day of forecast data
     const forecastData = []
+
+    let timeUntilTrip = bigData.userData.timeUntilTrip
+    let timeUntilReturn = bigData.userData.timeUntilReturn
+    const departureDate = bigData.userData.departureDate
+
+    // Checks if there is a mismatch between local time of user and local time 
+    // at destination, adjusts dates accordingly
+    if (!(departureDate == weatherbitData.data[timeUntilTrip].valid_date)) {
+        console.log(`Date difference between user and destination detected!`)
+        // If departure date matches the next element in the forecast array, 
+        // then current local date is 1 day behind user's date, and should
+        // start at next element in the array
+        if (departureDate == weatherbitData.data[timeUntilTrip + 1].valid_date) {
+            console.log(`Destination current local date is 1 day behind user's date`)
+            timeUntilTrip += 1
+            timeUntilReturn += 1
+            // Otherwise current local date must be 1 date after user's date
+        } else {
+            console.log(`Destination current local date is 1 day ahead of user's date`)
+            if (timeUntilTrip > 0) {
+                timeUntilTrip -= 1
+            }
+            if (timeUntilReturn > 0) {
+                timeUntilReturn -= 1
+            }
+        }
+    }
 
     // counter max is 15 because API currently returns max 16 days data
     let lastForecastDay = 15

@@ -31,7 +31,7 @@ export async function apiCalls(bigData) {
         errorMessage.innerHTML = serverError
         return null
     }
-    bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData.userData.timeUntilTrip, bigData.userData.timeUntilReturn)
+    bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData)
     console.log(bigData.forecastData)
 
     // Calls the Pixabay API, checks result for failure to connect
