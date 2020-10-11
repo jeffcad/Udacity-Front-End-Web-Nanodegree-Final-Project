@@ -29,6 +29,7 @@ export function extractForecastData(weatherbitData, bigData) {
 
     // Checks if there is a mismatch between local time of user and local time 
     // at destination, adjusts dates accordingly
+    bigData["todayFinishedAtDestination"] = false
     if (!(departureDate == weatherbitData.data[timeUntilTrip].valid_date)) {
         console.log(`Date difference between user and destination detected!`)
         // If departure date matches the next element in the forecast array, 
@@ -43,6 +44,10 @@ export function extractForecastData(weatherbitData, bigData) {
             console.log(`Destination current local date is 1 day ahead of user's date`)
             if (timeUntilTrip > 0) {
                 timeUntilTrip -= 1
+            } else {
+                // User leaves today but today's date is finished
+                // at destination
+                bigData.todayFinishedAtDestination = true
             }
             if (timeUntilReturn > 0) {
                 timeUntilReturn -= 1

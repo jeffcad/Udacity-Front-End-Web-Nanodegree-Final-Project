@@ -55,6 +55,16 @@ export function updateUI(bigData) {
 
 
     fragment = document.createDocumentFragment()
+
+    // Make a card with message if user leaves today but it's already 
+    // tomorrow's date at destination so no forecast available
+    if (bigData.todayFinishedAtDestination) {
+        // Create the card div, data will append to this
+        const forecastCard = document.createElement('div')
+        forecastCard.classList.add('forecast-card')
+        forecastCard.innerHTML = "<h3>Today's date in your local time is already finished at the destination, so no forecast here.</h3>"
+        fragment.append(forecastCard)
+    }
     const forecasts = bigData.forecastData
 
     // Create a forecast card for each day in the trip
