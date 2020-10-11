@@ -125,6 +125,7 @@ export function updateUI(bigData) {
 
     document.getElementById('forecast-title').innerHTML = "Here is the forecast for your trip:"
 
+
     // Image of the location
     const locationImage = document.createElement('img')
     locationImage.src = bigData.photo
@@ -132,17 +133,22 @@ export function updateUI(bigData) {
     locationImage.height = 225
     locationImage.width = 300
     const imageContainer = document.getElementById('location-image-container')
+
     // Clears previous image (if any) and adds new one
     // Multiple images will pile up if not cleared
     imageContainer.innerHTML = ""
+
     // Create document fragment to add to true DOM all at once
     // This is better performance, each add to DOM has a cost
     let fragment = document.createDocumentFragment()
     fragment.append(locationImage)
-    // Create the button to change the image, add click listener
+
+    // Create the button to change the image
     const changeImageButton = document.createElement('button')
     changeImageButton.innerHTML = "Change Image"
     changeImageButton.classList.add('change-image-button')
+
+    // Add the click listener
     changeImageButton.addEventListener('click', () => {
         // Get a random photo, clear storage, set storage again
         // The resetting of the storage makes sure that same photo will
@@ -155,14 +161,18 @@ export function updateUI(bigData) {
     fragment.append(changeImageButton)
     imageContainer.append(fragment)
 
+
     fragment = document.createDocumentFragment()
     const forecasts = bigData.forecastData
+
     // Create a forecast card for each day in the trip
     for (const forecast of forecasts) {
         const forecastCard = Client.createForecastCard(forecast, bigData.userData.units)
+
         // Append the card to the fragment for now, leave the DOM alone
         fragment.append(forecastCard)
     }
+
     // Clear any old data from the card container and add new cards to true DOM
     const forecastCardContainer = document.getElementById('forecast-card-container')
     forecastCardContainer.innerHTML = ""
