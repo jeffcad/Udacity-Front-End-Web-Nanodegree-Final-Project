@@ -74,7 +74,7 @@ async function callWeather(req, res) {
     const latitude = req.body.cityData.latitude
     const longitude = req.body.cityData.longitude
     const locationURL = `lat=${latitude}&lon=${longitude}`
-    const units = req.body.units
+    const units = req.body.userData.units
     const weatherbitURL = WEATHERBIT_ROOT + locationURL + WEATHERBIT_KEY_URL + WEATHERBIT_PARAMS + units
     console.log(`Weatherbit URL is ${weatherbitURL}`)
     try {

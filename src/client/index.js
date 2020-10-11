@@ -3,7 +3,7 @@
 
 // Import functions from other files
 import { submitted } from './js/app'
-import { updateUI } from './js/app'
+import { updateUI } from './js/updateUI'
 import { checkLocalStorage } from './js/localStorage'
 import { clearLocalStorage } from './js/localStorage'
 import { apiCalls } from './js/apiCalls'
