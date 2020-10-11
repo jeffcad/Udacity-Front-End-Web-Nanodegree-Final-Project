@@ -41,7 +41,8 @@ export async function apiCalls(bigData) {
         errorMessage.innerHTML = serverError
         return null
     }
-    bigData["photo"] = Client.extractPhoto(photoData)
+    bigData["photo"] = Client.extractMostLikedPhoto(photoData)
+    bigData["photoData"] = photoData
     console.log(bigData.photo)
 
     // Calls the storedata route to store bigData in server variable

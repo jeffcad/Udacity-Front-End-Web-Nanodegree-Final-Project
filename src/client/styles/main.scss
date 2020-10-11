@@ -1,5 +1,6 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
+$hover-colour: powderblue;
 $h1-font-size: 5rem;
 $h2-font-size: 3rem;
 $h3-font-size: 2.5rem;
@@ -48,6 +49,46 @@ header {
 .results-container {
     grid-area: 3/1/4/2;
     margin-top: 30px;
+    margin-block: 30px;
+}
+
+.location-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .change-image-button {
+        background-color: $primary-colour;
+        color: white;
+        cursor: pointer;
+        border-color: black;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 270px;
+        font-size: $reg-font-size;
+        font-weight: normal;
+        font-family: 'Indie Flower', cursive;
+        box-shadow: 2px 2px 4px $shadow-colour;
+        opacity: 0.6;
+        transition: 0.3s;
+
+        &:hover {
+            outline: none;
+            opacity: 1;
+            border: 2px solid $hover-colour;
+        }
+
+        &:focus {
+            outline: none;
+            opacity: 1;
+            border: 5px solid black;
+        }
+
+        &:active {
+            background-color: $hover-colour;
+        }
+    }
 }
 
 .api-logo-container {

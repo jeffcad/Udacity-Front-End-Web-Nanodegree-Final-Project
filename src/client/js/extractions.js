@@ -76,12 +76,11 @@ export function extractForecastData(weatherbitData, bigData) {
     return forecastData
 }
 
-// Could also make photo selection random?
 /**
  * Extracts the most-liked photo from the list
  * @param {object} photoData Data returned from Pixabay API
  */
-export function extractPhoto(photoData) {
+export function extractMostLikedPhoto(photoData) {
     // Holds the most number of likes so far
     let topLikes = 0
     let chosenPhoto = ""
@@ -101,4 +100,18 @@ export function extractPhoto(photoData) {
     }
     console.log(`Top photo had ${topLikes} likes`)
     return chosenPhoto
+}
+
+/**
+ * Extracts a random photo from the list
+ * @param {object} photoData Data returned from Pixabay API
+ */
+export function extractRandomPhoto(photoData) {
+    const numberOfPhotos = photoData.totalHits
+    // Use numberOfPhotos-1 because this will be an array index
+    const randomNumber = Math.round(Math.random() * (numberOfPhotos - 1))
+    console.log(`Random photo chosen #${randomNumber + 1} of ${numberOfPhotos}`)
+    const randomPhoto = photoData.hits[randomNumber].webformatURL
+
+    return randomPhoto
 }

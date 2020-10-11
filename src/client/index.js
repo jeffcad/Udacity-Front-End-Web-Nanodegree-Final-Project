@@ -9,7 +9,8 @@ import { clearLocalStorage } from './js/localStorage'
 import { apiCalls } from './js/apiCalls'
 import { extractCityData } from './js/extractions'
 import { extractForecastData } from './js/extractions'
-import { extractPhoto } from './js/extractions'
+import { extractMostLikedPhoto } from './js/extractions'
+import { extractRandomPhoto } from './js/extractions'
 import { createForecastCard } from './js/createForecastCard'
 
 // Import styles from other files
@@ -60,7 +61,8 @@ export {
     apiCalls,
     extractCityData,
     extractForecastData,
-    extractPhoto,
+    extractMostLikedPhoto,
+    extractRandomPhoto,
     createForecastCard
 }
 

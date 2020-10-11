@@ -135,11 +135,27 @@ export function updateUI(bigData) {
     // Clears previous image (if any) and adds new one
     // Multiple images will pile up if not cleared
     imageContainer.innerHTML = ""
-    imageContainer.append(locationImage)
-
     // Create document fragment to add to true DOM all at once
     // This is better performance, each add to DOM has a cost
-    const fragment = document.createDocumentFragment()
+    let fragment = document.createDocumentFragment()
+    fragment.append(locationImage)
+    // Create the button to change the image, add click listener
+    const changeImageButton = document.createElement('button')
+    changeImageButton.innerHTML = "Change Image"
+    changeImageButton.classList.add('change-image-button')
+    changeImageButton.addEventListener('click', () => {
+        // Get a random photo, clear storage, set storage again
+        // The resetting of the storage makes sure that same photo will
+        // be loaded again if user comes back
+        bigData.photo = Client.extractRandomPhoto(bigData.photoData)
+        locationImage.src = bigData.photo
+        localStorage.clear()
+        localStorage.setItem('bigData', JSON.stringify(bigData))
+    })
+    fragment.append(changeImageButton)
+    imageContainer.append(fragment)
+
+    fragment = document.createDocumentFragment()
     const forecasts = bigData.forecastData
     // Create a forecast card for each day in the trip
     for (const forecast of forecasts) {
