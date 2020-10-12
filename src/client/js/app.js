@@ -75,10 +75,10 @@ export async function submitted(event) {
     // If connections didn't succeed, null is returned, so checking for that
     if (bigData != null) {
         Client.updateUI(bigData)
-    }
 
-    // Add all data to local storage
-    localStorage.setItem('bigData', JSON.stringify(bigData))
+        // Add all data to local storage
+        localStorage.setItem('bigData', JSON.stringify(bigData))
+    }
 }
 
 
