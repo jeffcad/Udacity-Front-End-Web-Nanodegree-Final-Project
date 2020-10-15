@@ -7,7 +7,7 @@
 const app = require('./server')
 
 // Designates what port the app will listen to for incoming requests
-const port = 8081
+const port = process.env.PORT || 8081
 app.listen(port,
     () => console.log(`Travel weather app listening on port ${port}!`)
 )

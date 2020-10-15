@@ -60,7 +60,7 @@ export async function apiCalls(bigData) {
  */
 export async function callServer(url, bigData) {
     try {
-        const response = await fetch(`http://localhost:8081/${url}`, {
+        const response = await fetch(`/${url}`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
@@ -71,7 +71,7 @@ export async function callServer(url, bigData) {
         })
         // Return null if server route was not found
         if (!response.ok) {
-            console.log(`Error connecting to http://localhost:8081/${url}. Response status ${response.status}`)
+            console.log(`Error connecting to /${url}. Response status ${response.status}`)
             return null
         }
         const responseJSON = await response.json()
