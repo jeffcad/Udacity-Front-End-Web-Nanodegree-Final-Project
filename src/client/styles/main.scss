@@ -1,5 +1,6 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
+$inactive-colour: rgba(255, 102, 0, 0.6);
 $hover-colour: powderblue;
 $h1-font-size: 5rem;
 $h2-font-size: 3rem;
@@ -58,8 +59,8 @@ header {
     align-items: center;
 
     .change-image-button {
-        background-color: $primary-colour;
-        color: white;
+        background-color: $inactive-colour;
+        color: black;
         cursor: pointer;
         border-color: black;
         border-radius: 10px;
@@ -70,22 +71,24 @@ header {
         font-weight: normal;
         font-family: 'Indie Flower', cursive;
         box-shadow: 2px 2px 4px $shadow-colour;
-        opacity: 0.6;
         transition: 0.3s;
 
         &:hover {
+            color: white;
             outline: none;
-            opacity: 1;
+            background-color: $primary-colour;
             border: 2px solid $hover-colour;
         }
 
         &:focus {
+            color: white;
             outline: none;
-            opacity: 1;
+            background-color: $primary-colour;
             border: 5px solid black;
         }
 
         &:active {
+            color: white;
             background-color: $hover-colour;
         }
     }

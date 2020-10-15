@@ -1,5 +1,6 @@
 $primary-colour: #ff6600;
 $shadow-colour: #803300;
+$inactive-colour: rgba(255, 102, 0, 0.6);
 $hover-colour: powderblue;
 $reg-font-size: 2rem;
 
@@ -73,8 +74,8 @@ $reg-font-size: 2rem;
     }
 
     .button {
-        background-color: $primary-colour;
-        color: white;
+        background-color: $inactive-colour;
+        color: black;
         cursor: pointer;
         border-color: black;
         border-radius: 10px;
@@ -82,19 +83,21 @@ $reg-font-size: 2rem;
         width: 270px;
         font-size: $reg-font-size;
         box-shadow: 2px 2px 4px $shadow-colour;
-        opacity: 0.6;
         transition: 0.3s;
 
         &:hover {
-            opacity: 1;
+            color: white;
+            background-color: $primary-colour;
         }
 
         &:focus {
-            opacity: 1;
+            color: white;
+            background-color: $primary-colour;
             border: 5px solid black;
         }
 
         &:active {
+            color: white;
             background-color: $hover-colour;
         }
     }
