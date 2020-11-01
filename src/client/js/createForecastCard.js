@@ -22,33 +22,9 @@ export function createForecastCard(forecast, units) {
     // Create the date div, calculate day of week
     const dateDiv = document.createElement('div')
     dateDiv.classList.add('date')
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     const dayOfWeekNumber = new Date(forecast.date).getDay()
-    let dayOfWeek;
-    switch (dayOfWeekNumber) {
-        case 0:
-            dayOfWeek = "(Sunday)"
-            break
-        case 1:
-            dayOfWeek = "(Monday)"
-            break
-        case 2:
-            dayOfWeek = "(Tuesday)"
-            break
-        case 3:
-            dayOfWeek = "(Wednesday)"
-            break
-        case 4:
-            dayOfWeek = "(Thursday)"
-            break
-        case 5:
-            dayOfWeek = "(Friday)"
-            break
-        case 6:
-            dayOfWeek = "(Saturday)"
-            break
-        default:
-            dayOfWeek = ""
-    }
+    const dayOfWeek = days[dayOfWeekNumber]
     dateDiv.innerHTML = `<h3 class="card-date">${forecast.date}<br>${dayOfWeek}</h3>`
 
     // Create icon div, link to icon image
