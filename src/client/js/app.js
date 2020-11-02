@@ -9,7 +9,6 @@ const countdown = require('countdown')
 export async function submitted(event) {
     // Prevents page reloading when button is clicked
     event.preventDefault()
-    console.log('Event listener connected')
 
     // Initialise error and result fields
     const errorMessage = document.getElementById('error-message')
@@ -21,7 +20,6 @@ export async function submitted(event) {
 
     // Destination city
     const destinationCity = document.getElementById('destination-city').value
-    console.log(`City: ${destinationCity}`)
     if (destinationCity == "") {
         errorMessage.innerHTML = "Please enter a destination city"
         return
@@ -33,7 +31,6 @@ export async function submitted(event) {
         errorMessage.innerHTML = "Please enter a departure date"
         return
     }
-    console.log(`Departure date: ${departureDate}`)
 
     // Return date
     // Not required, will just give full forecast results if left blank
@@ -42,16 +39,12 @@ export async function submitted(event) {
         errorMessage.innerHTML = "Please enter a return date"
         return
     }
-    console.log(`Return date: ${returnDate}`)
 
     const timeUntilTrip = getTimeUntilDate(departureDate)
-    console.log(`Days until departure: ${timeUntilTrip}`)
 
     const timeUntilReturn = getTimeUntilDate(returnDate)
-    console.log(`Days until return: ${timeUntilReturn}`)
 
     const tripDuration = timeUntilReturn - timeUntilTrip
-    console.log(`Trip duration: ${tripDuration}`)
     if (tripDuration < 0) {
         errorMessage.innerHTML = "Return date can't be before departure date"
         return
@@ -68,7 +61,6 @@ export async function submitted(event) {
     // Initialise bigData object with user's input and calculations above
     let bigData = {}
     bigData["userData"] = { destinationCity, departureDate, returnDate, timeUntilTrip, timeUntilReturn, tripDuration, units }
-    console.log(bigData)
 
     // Calls the API function, then updates the UI if all connections succeeded
     bigData = await Client.apiCalls(bigData)

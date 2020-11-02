@@ -22,7 +22,6 @@ export async function apiCalls(bigData) {
         return null
     }
     bigData["cityData"] = Client.extractCityData(geonamesData)
-    console.log(bigData.cityData)
 
     // Calls the Weatherbit API, checks result for failure to connect
     // Assigns result to forecastData key in bigData object
@@ -32,7 +31,6 @@ export async function apiCalls(bigData) {
         return null
     }
     bigData["forecastData"] = Client.extractForecastData(weatherbitData, bigData)
-    console.log(bigData.forecastData)
 
     // Calls the Pixabay API, checks result for failure to connect
     // Assigns result URL to photo key in bigData object
@@ -43,11 +41,9 @@ export async function apiCalls(bigData) {
     }
     bigData["photo"] = Client.extractMostLikedPhoto(photoData)
     bigData["photoData"] = photoData
-    console.log(bigData.photo)
 
     // Calls the storedata route to store bigData in server variable
     const storeMessage = await callServer('storedata', bigData)
-    console.log(storeMessage)
 
     // Return modified bigData object
     return bigData

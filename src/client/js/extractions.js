@@ -32,24 +32,20 @@ export function extractForecastData(weatherbitData, bigData) {
     bigData["departFinishedAtDestination"] = false
     bigData["returnFinishedAtDestination"] = false
     if (!(departureDate == weatherbitData.data[timeUntilTrip].valid_date)) {
-        console.log(`Date difference between user and destination detected!`)
         // If departure date matches the next element in the forecast array, 
         // then current local date is 1 day behind user's date, and should
         // start at next element in the array
         if (departureDate == weatherbitData.data[timeUntilTrip + 1].valid_date) {
-            console.log(`Destination current local date is 1 day behind user's date`)
             timeUntilTrip += 1
             timeUntilReturn += 1
             // Otherwise current local date must be 1 date after user's date
         } else {
-            console.log(`Destination current local date is 1 day ahead of user's date`)
             if (timeUntilTrip > 0) {
                 timeUntilTrip -= 1
             } else {
                 // User leaves today but today's date is finished
                 // at destination
                 bigData.departFinishedAtDestination = true
-                console.log("departFinishedAtDestination is true")
             }
             if (timeUntilReturn > 0) {
                 timeUntilReturn -= 1
@@ -57,7 +53,6 @@ export function extractForecastData(weatherbitData, bigData) {
                 // User returns today but today's date is finished
                 // at destination
                 bigData.returnFinishedAtDestination = true
-                console.log("FinishedAtDestination is true")
             }
         }
     }
@@ -110,7 +105,6 @@ export function extractMostLikedPhoto(photoData) {
             topLikes = photoData.hits[i].likes
         }
     }
-    console.log(`Top photo had ${topLikes} likes`)
     return chosenPhoto
 }
 
@@ -127,7 +121,6 @@ export function extractRandomPhoto(photoData) {
     }
     // Use numberOfPhotos-1 because this will be an array index
     const randomNumber = Math.round(Math.random() * (count - 1))
-    console.log(`Random photo chosen #${randomNumber + 1} of ${count}`)
     const randomPhoto = photoData.hits[randomNumber].webformatURL
 
     return randomPhoto

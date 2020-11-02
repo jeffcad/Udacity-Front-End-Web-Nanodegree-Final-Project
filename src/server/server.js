@@ -45,10 +45,8 @@ app.get('/',
 app.post('/callgeo', callGeo)
 
 async function callGeo(req, res) {
-    console.log(`Geonames request city is ${req.body.userData.destinationCity}`)
     const city = req.body.userData.destinationCity
     const geonamesURL = GEONAMES_ROOT + city + GEONAMES_KEY_URL + GEONAMES_PARAMS
-    console.log(`Geonames URL is ${geonamesURL}`)
     try {
         const response = await fetch(geonamesURL)
         // Checks for failed data transfer from API, returns null
@@ -69,14 +67,11 @@ async function callGeo(req, res) {
 app.post('/callweather', callWeather)
 
 async function callWeather(req, res) {
-    console.log(`Request latitude is ${req.body.cityData.latitude}`)
-    console.log(`Request longitude is ${req.body.cityData.longitude}`)
     const latitude = req.body.cityData.latitude
     const longitude = req.body.cityData.longitude
     const locationURL = `lat=${latitude}&lon=${longitude}`
     const units = req.body.userData.units
     const weatherbitURL = WEATHERBIT_ROOT + locationURL + WEATHERBIT_KEY_URL + WEATHERBIT_PARAMS + units
-    console.log(`Weatherbit URL is ${weatherbitURL}`)
     try {
         const response = await fetch(weatherbitURL)
         // Checks for failed data transfer from API, returns null
@@ -97,10 +92,8 @@ async function callWeather(req, res) {
 app.post('/callphoto', callPhoto)
 
 async function callPhoto(req, res) {
-    console.log(`Pixabay request city is ${req.body.userData.destinationCity}`)
     const city = req.body.userData.destinationCity
     let pixabayURL = PIXABAY_ROOT + city + PIXABAY_KEY_URL + PIXABAY_PARAMS
-    console.log(`Pixabay URL is ${pixabayURL}`)
     try {
         let response = await fetch(pixabayURL)
         // Checks for failed data transfer from API, returns null
@@ -113,9 +106,7 @@ async function callPhoto(req, res) {
         // If no photo was returned for city, get one for the country instead
         if (responseJSON.total == 0) {
             const country = req.body.cityData.country
-            console.log(`No photo available for ${city}. Finding photo for ${country}.`)
             pixabayURL = PIXABAY_ROOT + country + PIXABAY_KEY_URL + PIXABAY_PARAMS
-            console.log(`Pixabay country search URL is ${pixabayURL}`)
             response = await fetch(pixabayURL)
             // Checks for failed data transfer from API, returns null
             if (!response.ok) {
@@ -138,7 +129,6 @@ app.post('/storedata', storeData)
 
 function storeData(req, res) {
     bigData.push(req.body)
-    console.log(bigData)
     res.send({ message: "Data received and stored" })
 }
 
